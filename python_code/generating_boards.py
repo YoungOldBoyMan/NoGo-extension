@@ -21,51 +21,73 @@ for i in range(3):
 
 def bfs_board(board):
     queue = deque()
+    point_queue = deque()
 
     for i in range(2):
         for j in range(3):
             explored = []
             queue.appendleft(board[i, j])
+            point_queue.appendleft((i, j))
             while len(queue) > 0:
+                print(queue)
+                print()
                 v = queue.pop()
+                point = point_queue.pop()
+                new_i, new_j = point
+                print(new_i)
+                print()
+                print(new_j)
                 if v == 0:
-                    return True
+                    continue
                 explored.append((i, j))
+                # print(explored)
                 if v == 1:
-                    if i == 0 and (not explored.__contains__((i+1, j))) and board[i+1, j] != 2:
-                        explored.append((i+1, j))
-                        queue.appendleft(board[i+1, j])
-                    if i == 1 and (not explored.__contains__((i-1, j))) and board[i-1, j] != 2:
-                        explored.append((i-1, j))
-                        queue.appendleft(board[i-1, j])
-                    if j != 2 and (not explored.__contains__((i, j+1))) and board[i, j+1] != 2:
-                        explored.append((i, j+1))
-                        queue.appendleft(board[i, j + 1])
-                    if j != 0 and (not explored.__contains__((i, j-1))) and board[i, j-1] != 2:
-                        explored.append((i, j-1))
-                        queue.appendleft(board[i, j - 1])
-                        
+                    if new_i == 0 and (not explored.__contains__((new_i+1, new_j))) and board[new_i+1, new_j] != 2:
+                        explored.append((new_i+1, new_j))
+                        queue.appendleft(board[new_i+1, new_j])
+                        point_queue.appendleft((new_i+1, new_j))
+                    if new_i == 1 and (not explored.__contains__((new_i-1, new_j))) and board[new_i-1, new_j] != 2:
+                        explored.append((new_i-1, new_j))
+                        queue.appendleft(board[new_i-1, new_j])
+                        point_queue.appendleft((new_i-1, new_j))
+                    if new_j != 2 and (not explored.__contains__((new_i, new_j+1))) and board[new_i, new_j+1] != 2:
+                        explored.append((new_i, new_j+1))
+                        queue.appendleft(board[new_i, new_j + 1])
+                        point_queue.appendleft((new_i, new_j+1))
+                    if new_j != 0 and (not explored.__contains__((new_i, new_j-1))) and board[new_i, new_j-1] != 2:
+                        explored.append((new_i, new_j-1))
+                        queue.appendleft(board[new_i, new_j - 1])
+                        point_queue.appendleft((new_i, new_j-1))
+
                 if v == 2:
-                    if i == 0 and (not explored.__contains__((i+1, j))) and board[i+1, j] != 1:
-                        explored.append((i+1, j))
-                        queue.appendleft(board[i+1, j])
-                    if i == 1 and (not explored.__contains__((i-1, j))) and board[i-1, j] != 1:
-                        explored.append((i-1, j))
-                        queue.appendleft(board[i-1, j])
-                    if j != 2 and (not explored.__contains__((i, j+1))) and board[i, j+1] != 1:
-                        explored.append((i, j+1))
-                        queue.appendleft(board[i, j + 1])
-                    if j != 0 and (not explored.__contains__((i, j-1))) and board[i, j-1] != 1:
-                        explored.append((i, j-1))
-                        queue.appendleft(board[i, j - 1])
+                    if new_i == 0 and (not explored.__contains__((new_i+1, new_j))) and board[new_i+1, new_j] != 1:
+                        explored.append((new_i+1, new_j))
+                        queue.appendleft(board[new_i+1, new_j])
+                        point_queue.appendleft((new_i+1, new_j))
+                    if new_i == 1 and (not explored.__contains__((new_i-1, new_j))) and board[new_i-1, new_j] != 1:
+                        explored.append((new_i-1, new_j))
+                        queue.appendleft(board[new_i-1, new_j])
+                        point_queue.appendleft((new_i-1, new_j))
+                    if new_j != 2 and (not explored.__contains__((new_i, new_j+1))) and board[new_i, new_j+1] != 1:
+                        explored.append((new_i, new_j+1))
+                        queue.appendleft(board[new_i, new_j + 1])
+                        point_queue.appendleft((new_i, new_j+1))
+                    if new_j != 0 and (not explored.__contains__((new_i, new_j-1))) and board[new_i, new_j-1] != 1:
+                        explored.append((new_i, new_j-1))
+                        queue.appendleft(board[new_i, new_j - 1])
+                        point_queue.appendleft((new_i, new_j-1))
                 if len(queue) == 0:
                     return False
+    return True
 
 
 for i in range(len(boards)):
     if not bfs_board(boards[i]):
         final_boards.append(boards[i])
 
+# if not bfs_board(boards[-1]):
+#     final_boards.append(boards[-1])
+# print(final_boards)
 
 for i in final_boards:
     print(i)
