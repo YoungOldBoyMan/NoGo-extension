@@ -18,7 +18,7 @@ for i in range(3):
                         if num_1 <= 3 and num_2 <= 2 and (num_1 == num_2 or num_1 == num_2 + 1):
                             boards.append(pos_boards)
 
-
+# Added test comment
 def bfs_board(board):
     queue = deque()
     point_queue = deque()
