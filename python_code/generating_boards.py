@@ -94,3 +94,4 @@ for i in final_boards:
     print(i)
     print()
 print(len(final_boards))
+
