@@ -68,7 +68,7 @@ not(white(0,0) black(0,1) white(0,2) open(1,0) black(1,1) black(1,2))
 not(white(0,0) black(0,1) white(0,2) black(1,0) open(1,1) open(1,2))
 not(white(0,0) black(0,1) white(0,2) black(1,0) open(1,1) black(1,2))
 not(white(0,0) black(0,1) white(0,2) black(1,0) black(1,1) open(1,2))
-not(white(0,0) white(0,1) black(0,2) black(1,0) black(1,1) open(1,2) )
+not(white(0,0) white(0,1) black(0,2) black(1,0) black(1,1) open(1,2))
 
 
 
@@ -142,4 +142,4 @@ not(white(0,0) black(0,1) white(0,2) open(1,0) black(1,1) black(1,2))
 not(white(0,0) black(0,1) white(0,2) black(1,0) open(1,1) open(1,2))
 not(white(0,0) black(0,1) white(0,2) black(1,0) open(1,1) black(1,2))
 not(white(0,0) black(0,1) white(0,2) black(1,0) black(1,1) open(1,2))
-not(white(0,0) white(0,1) black(0,2) black(1,0) black(1,1) open(1,2) )
+not(white(0,0) white(0,1) black(0,2) black(1,0) black(1,1) open(1,2))
