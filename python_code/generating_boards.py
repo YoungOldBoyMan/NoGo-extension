@@ -18,14 +18,13 @@ for i in range(3):
                         if num_1 <= 3 and num_2 <= 2 and (num_1 == num_2 or num_1 == num_2 + 1):
                             boards.append(pos_boards)
 
-# Added test comment
-# hyggehejsa
+
 def bfs_board(board):
-    queue = deque()
-    point_queue = deque()
 
     for i in range(2):
         for j in range(3):
+            queue = deque()
+            point_queue = deque()
             explored = []
             queue.appendleft(board[i, j])
             point_queue.appendleft((i, j))
@@ -39,8 +38,8 @@ def bfs_board(board):
                 print()
                 print(new_j)
                 if v == 0:
-                    continue
-                explored.append((i, j))
+                    break
+                explored.append((new_i, new_j))
                 # print(explored)
                 if v == 1:
                     if new_i == 0 and (not explored.__contains__((new_i+1, new_j))) and board[new_i+1, new_j] != 2:
@@ -79,16 +78,17 @@ def bfs_board(board):
                         point_queue.appendleft((new_i, new_j-1))
                 if len(queue) == 0:
                     return False
+    print(board)
     return True
 
+# if not bfs_board(boards[-2]):
+#     final_boards.append(boards[-2])
+# print(final_boards)
 
 for i in range(len(boards)):
     if not bfs_board(boards[i]):
         final_boards.append(boards[i])
 
-# if not bfs_board(boards[-1]):
-#     final_boards.append(boards[-1])
-# print(final_boards)
 
 for i in final_boards:
     print(i)
