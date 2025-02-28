@@ -85,6 +85,7 @@ def bfs_board(board):
 #     final_boards.append(boards[-2])
 # print(final_boards)
 
+
 for i in range(len(boards)):
     if not bfs_board(boards[i]):
         final_boards.append(boards[i])
@@ -94,4 +95,3 @@ for i in final_boards:
     print(i)
     print()
 print(len(final_boards))
-
