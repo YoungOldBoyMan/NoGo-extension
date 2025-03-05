@@ -1,3 +1,9 @@
+#boardsize
+2 3
+#init
+#depth
+5
+
 #blackgoal
 not(open(0,0) open(0,1) black(0,2) open(1,0) black(1,1) white(1,2) )
 not(open(0,0) black(0,1) black(0,2) black(1,0) white(1,1) white(1,2) )
