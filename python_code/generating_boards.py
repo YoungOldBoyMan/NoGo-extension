@@ -14,7 +14,7 @@ for i in range(3):
                                                [l, m, n]])
                         num_1 = np.count_nonzero(pos_boards == 1)
                         num_2 = np.count_nonzero(pos_boards == 2)
-                        if num_1 <= 3 and num_2 <= 2 and (num_1 == num_2 or num_1 == num_2 + 1):
+                        if (num_1 == num_2 or num_1 == num_2 + 1):
                             boards.append(pos_boards)
 
 
