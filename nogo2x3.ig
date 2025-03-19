@@ -10,7 +10,7 @@ False
 #whitegoal
 
 
-#blackgoal
+#blackinvariant
 not(open(0,0) open(0,1) open(0,2) open(1,0) open(1,1) black(1,2) open(2,0) black(2,1) white(2,2) )
 not(open(0,0) open(0,1) open(0,2) open(1,0) black(1,1) black(1,2) black(2,0) white(2,1) white(2,2) )
 not(open(0,0) open(0,1) open(0,2) open(1,0) black(1,1) black(1,2) white(2,0) black(2,1) white(2,2) )
