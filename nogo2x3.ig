@@ -1,5 +1,5 @@
 #boardsize
-2 3
+3 3
 #init
 #depth
 5
