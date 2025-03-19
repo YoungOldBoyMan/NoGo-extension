@@ -1,329 +1,361 @@
-# 1/1 (black/white) Action variables, 1 and 2 (action parameter) index variables (x, y), and game stop variables : 
-exists(1, 2, 3, 4, 5)
-exists(6)
-forall(7, 8, 9)
+# 1/1 (black/white) Action variables, 2 and 2 (action parameter) index variables (x, y), and game stop variables : 
+exists(1, 2, 3, 4, 5, 6)
+exists(7)
+forall(8, 9, 10, 11)
 # white illegal variable: 
-exists(10)
+exists(12)
 # indicator variables, specifying which position is voilated in illegal move: 
-exists(11)
-exists(12, 13, 14, 15, 16)
-exists(17)
-forall(18, 19, 20)
+exists(13)
+exists(14, 15, 16, 17, 18, 19)
+exists(20)
+forall(21, 22, 23, 24)
 # white illegal variable: 
-exists(21)
+exists(25)
 # indicator variables, specifying which position is voilated in illegal move: 
-exists(22)
-exists(23, 24, 25, 26, 27)
+exists(26)
+exists(27, 28, 29, 30, 31, 32)
 # black goal index variables: 
 # white goal index and conjunction variables: 
 # Forall index variables: 
-forall(28, 29, 30)
+forall(33, 34, 35, 36)
 # Predicate variables: 
-exists(31, 32)
-exists(33, 34)
-exists(35, 36)
 exists(37, 38)
 exists(39, 40)
 exists(41, 42)
-output(228)
+exists(43, 44)
+exists(45, 46)
+exists(47, 48)
+output(266)
 # ------------------------------------------------------------------------
 # Transitions: 
 # Player 1 (black) transition function for time step 0: 
 # less than constraints for black moves:
 # propagation constraints:
-43 = or(-31, 33)
-44 = or(-33, 31)
-45 = and(43, 44)
-46 = or(-32, 34)
-47 = or(-34, 32)
-48 = and(46, 47)
-49 = and(45, 48)
-# less than constraints for positive index bounds:
-# less than constraints for positive index bounds:
-50 = and(3, -4)
-51 = or(-3, 50)
-# computing x variables for constraints,['?x', '?y'] add/sub/none:
-# computing y variables for constraints,['?x', '?y'] add/sub/none:
-# new x constraint equality gate with forall x variables: 
-52 = or(-2, 28)
-53 = or(-28, 2)
+49 = or(-37, 39)
+50 = or(-39, 37)
+51 = and(49, 50)
+52 = or(-38, 40)
+53 = or(-40, 38)
 54 = and(52, 53)
+55 = and(51, 54)
+# less than constraints for positive index bounds:
+56 = and(2, -3)
+57 = or(-2, 56)
+# less than constraints for positive index bounds:
+58 = and(4, -5)
+59 = or(-4, 58)
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+60 = or(-2, 33)
+61 = or(-33, 2)
+62 = and(60, 61)
+63 = or(-3, 34)
+64 = or(-34, 3)
+65 = and(63, 64)
+66 = and(62, 65)
 # new y constraint equality gate with forall y variables: 
-55 = or(-3, 29)
-56 = or(-29, 3)
-57 = and(55, 56)
-58 = or(-4, 30)
-59 = or(-30, 4)
-60 = and(58, 59)
-61 = and(57, 60)
-62 = and(54, 61)
-63 = or(-62, -31)
+67 = or(-4, 35)
+68 = or(-35, 4)
+69 = and(67, 68)
+70 = or(-5, 36)
+71 = or(-36, 5)
+72 = and(70, 71)
+73 = and(69, 72)
+74 = and(66, 73)
+75 = or(-74, -37)
 # computing x variables for constraints,['?x', '?y'] add/sub/none:
 # computing y variables for constraints,['?x', '?y'] add/sub/none:
 # new x constraint equality gate with forall x variables: 
 # new y constraint equality gate with forall y variables: 
-64 = and(33, -34)
+76 = and(39, -40)
 # if then constraint for black predicate:
-65 = or(-62, 64)
+77 = or(-74, 76)
 # disjunction for all touched positions:
 # frame axiom; if not touched position, then it is propagated:
-66 = or(62, 49)
+78 = or(74, 55)
 # conjunction for all the then constraints:
-67 = and(51, 63, 65, 66)
+79 = and(57, 59, 75, 77, 78)
 # final if then constraint for current action:
-68 = or(1, 67)
-69 = and(-1, 68)
+80 = or(1, 79)
+81 = and(-1, 80)
 # Player 2 (white) transition function for time step 1: 
 # propagation constraints:
-70 = or(-33, 35)
-71 = or(-35, 33)
-72 = and(70, 71)
-73 = or(-34, 36)
-74 = or(-36, 34)
-75 = and(73, 74)
-76 = and(72, 75)
+82 = or(-39, 41)
+83 = or(-41, 39)
+84 = and(82, 83)
+85 = or(-40, 42)
+86 = or(-42, 40)
+87 = and(85, 86)
+88 = and(84, 87)
 # less than constraints for white moves:
 # generating less than bounds for indexes:
 # less than constraints for positive index bounds:
+89 = and(8, -9)
+90 = or(-8, 89)
 # less than constraints for positive index bounds:
-77 = and(8, -9)
-78 = or(-8, 77)
-79 = or(6, 78)
+91 = and(10, -11)
+92 = or(-10, 91)
+93 = and(90, 92)
+94 = or(7, 93)
 # conjunction for all the bound constraints:
-80 = and(-6, 79)
+95 = and(-7, 94)
 # single equality gate for the bound boolean variale and the final bound conjuction gate:
-81 = or(-10, 80)
-82 = or(-80, 10)
-83 = and(81, 82)
+96 = or(-12, 95)
+97 = or(-95, 12)
+98 = and(96, 97)
 # generating precondition equalities with boolean variables:
 # computing x variables for constraints,['?x', '?y'] add/sub/none:
 # computing y variables for constraints,['?x', '?y'] add/sub/none:
 # new x constraint equality gate with forall x variables: 
-84 = or(-7, 28)
-85 = or(-28, 7)
-86 = and(84, 85)
+99 = or(-8, 33)
+100 = or(-33, 8)
+101 = and(99, 100)
+102 = or(-9, 34)
+103 = or(-34, 9)
+104 = and(102, 103)
+105 = and(101, 104)
 # new y constraint equality gate with forall y variables: 
-87 = or(-8, 29)
-88 = or(-29, 8)
-89 = and(87, 88)
-90 = or(-9, 30)
-91 = or(-30, 9)
-92 = and(90, 91)
-93 = and(89, 92)
-94 = and(86, 93)
-95 = or(33, 11)
-96 = or(-11, -33)
-97 = and(95, 96)
-98 = or(6, -94, 97)
+106 = or(-10, 35)
+107 = or(-35, 10)
+108 = and(106, 107)
+109 = or(-11, 36)
+110 = or(-36, 11)
+111 = and(109, 110)
+112 = and(108, 111)
+113 = and(105, 112)
+114 = or(39, 13)
+115 = or(-13, -39)
+116 = and(114, 115)
+117 = or(7, -113, 116)
 # generating effects, implcation when the game is not stopped and bounds,preconditions hold:
-99 = and(10, 11)
+118 = and(12, 13)
 # computing x variables for constraints,['?x', '?y'] add/sub/none:
 # computing y variables for constraints,['?x', '?y'] add/sub/none:
 # new x constraint equality gate with forall x variables: 
 # new y constraint equality gate with forall y variables: 
-100 = and(35, 36)
+119 = and(41, 42)
 # if then constraint for white predicate:
-101 = or(-94, 100)
+120 = or(-113, 119)
 # disjunction for all touched positions:
 # frame axiom; if not touched position, then it is propagated:
-102 = or(94, 76)
-103 = and(101, 102)
-104 = and(99, -6)
-105 = or(-104, 103)
-106 = and(83, 98, 105, -6)
+121 = or(113, 88)
+122 = and(120, 121)
+123 = and(118, -7)
+124 = or(-123, 122)
+125 = and(98, 117, 124, -7)
 # Player 1 (black) transition function for time step 2: 
 # less than constraints for black moves:
 # propagation constraints:
-107 = or(-35, 37)
-108 = or(-37, 35)
-109 = and(107, 108)
-110 = or(-36, 38)
-111 = or(-38, 36)
-112 = and(110, 111)
-113 = and(109, 112)
+126 = or(-41, 43)
+127 = or(-43, 41)
+128 = and(126, 127)
+129 = or(-42, 44)
+130 = or(-44, 42)
+131 = and(129, 130)
+132 = and(128, 131)
 # less than constraints for positive index bounds:
+133 = and(15, -16)
+134 = or(-15, 133)
 # less than constraints for positive index bounds:
-114 = and(14, -15)
-115 = or(-14, 114)
+135 = and(17, -18)
+136 = or(-17, 135)
 # computing x variables for constraints,['?x', '?y'] add/sub/none:
 # computing y variables for constraints,['?x', '?y'] add/sub/none:
 # new x constraint equality gate with forall x variables: 
-116 = or(-13, 28)
-117 = or(-28, 13)
-118 = and(116, 117)
+137 = or(-15, 33)
+138 = or(-33, 15)
+139 = and(137, 138)
+140 = or(-16, 34)
+141 = or(-34, 16)
+142 = and(140, 141)
+143 = and(139, 142)
 # new y constraint equality gate with forall y variables: 
-119 = or(-14, 29)
-120 = or(-29, 14)
-121 = and(119, 120)
-122 = or(-15, 30)
-123 = or(-30, 15)
-124 = and(122, 123)
-125 = and(121, 124)
-126 = and(118, 125)
-127 = or(-126, -35)
+144 = or(-17, 35)
+145 = or(-35, 17)
+146 = and(144, 145)
+147 = or(-18, 36)
+148 = or(-36, 18)
+149 = and(147, 148)
+150 = and(146, 149)
+151 = and(143, 150)
+152 = or(-151, -41)
 # computing x variables for constraints,['?x', '?y'] add/sub/none:
 # computing y variables for constraints,['?x', '?y'] add/sub/none:
 # new x constraint equality gate with forall x variables: 
 # new y constraint equality gate with forall y variables: 
-128 = and(37, -38)
+153 = and(43, -44)
 # if then constraint for black predicate:
-129 = or(-126, 128)
+154 = or(-151, 153)
 # disjunction for all touched positions:
 # frame axiom; if not touched position, then it is propagated:
-130 = or(126, 113)
+155 = or(151, 132)
 # conjunction for all the then constraints:
-131 = and(115, 127, 129, 130)
+156 = and(134, 136, 152, 154, 155)
 # final if then constraint for current action:
-132 = or(12, 131)
-133 = and(-12, 132)
+157 = or(14, 156)
+158 = and(-14, 157)
 # Player 2 (white) transition function for time step 3: 
 # propagation constraints:
-134 = or(-37, 39)
-135 = or(-39, 37)
-136 = and(134, 135)
-137 = or(-38, 40)
-138 = or(-40, 38)
-139 = and(137, 138)
-140 = and(136, 139)
+159 = or(-43, 45)
+160 = or(-45, 43)
+161 = and(159, 160)
+162 = or(-44, 46)
+163 = or(-46, 44)
+164 = and(162, 163)
+165 = and(161, 164)
 # less than constraints for white moves:
 # generating less than bounds for indexes:
 # less than constraints for positive index bounds:
+166 = and(21, -22)
+167 = or(-21, 166)
 # less than constraints for positive index bounds:
-141 = and(19, -20)
-142 = or(-19, 141)
-143 = or(17, 142)
+168 = and(23, -24)
+169 = or(-23, 168)
+170 = and(167, 169)
+171 = or(20, 170)
 # conjunction for all the bound constraints:
-144 = and(-17, 143)
+172 = and(-20, 171)
 # single equality gate for the bound boolean variale and the final bound conjuction gate:
-145 = or(-21, 144)
-146 = or(-144, 21)
-147 = and(145, 146)
+173 = or(-25, 172)
+174 = or(-172, 25)
+175 = and(173, 174)
 # generating precondition equalities with boolean variables:
 # computing x variables for constraints,['?x', '?y'] add/sub/none:
 # computing y variables for constraints,['?x', '?y'] add/sub/none:
 # new x constraint equality gate with forall x variables: 
-148 = or(-18, 28)
-149 = or(-28, 18)
-150 = and(148, 149)
+176 = or(-21, 33)
+177 = or(-33, 21)
+178 = and(176, 177)
+179 = or(-22, 34)
+180 = or(-34, 22)
+181 = and(179, 180)
+182 = and(178, 181)
 # new y constraint equality gate with forall y variables: 
-151 = or(-19, 29)
-152 = or(-29, 19)
-153 = and(151, 152)
-154 = or(-20, 30)
-155 = or(-30, 20)
-156 = and(154, 155)
-157 = and(153, 156)
-158 = and(150, 157)
-159 = or(37, 22)
-160 = or(-22, -37)
-161 = and(159, 160)
-162 = or(17, -158, 161)
-# generating effects, implcation when the game is not stopped and bounds,preconditions hold:
-163 = and(21, 22)
-# computing x variables for constraints,['?x', '?y'] add/sub/none:
-# computing y variables for constraints,['?x', '?y'] add/sub/none:
-# new x constraint equality gate with forall x variables: 
-# new y constraint equality gate with forall y variables: 
-164 = and(39, 40)
-# if then constraint for white predicate:
-165 = or(-158, 164)
-# disjunction for all touched positions:
-# frame axiom; if not touched position, then it is propagated:
-166 = or(158, 140)
-167 = and(165, 166)
-168 = and(163, -17)
-169 = or(-168, 167)
-170 = and(147, 162, 169, -17)
-# Player 1 (black) transition function for time step 4: 
-# less than constraints for black moves:
-# propagation constraints:
-171 = or(-39, 41)
-172 = or(-41, 39)
-173 = and(171, 172)
-174 = or(-40, 42)
-175 = or(-42, 40)
-176 = and(174, 175)
-177 = and(173, 176)
-# less than constraints for positive index bounds:
-# less than constraints for positive index bounds:
-178 = and(25, -26)
-179 = or(-25, 178)
-# computing x variables for constraints,['?x', '?y'] add/sub/none:
-# computing y variables for constraints,['?x', '?y'] add/sub/none:
-# new x constraint equality gate with forall x variables: 
-180 = or(-24, 28)
-181 = or(-28, 24)
-182 = and(180, 181)
-# new y constraint equality gate with forall y variables: 
-183 = or(-25, 29)
-184 = or(-29, 25)
+183 = or(-23, 35)
+184 = or(-35, 23)
 185 = and(183, 184)
-186 = or(-26, 30)
-187 = or(-30, 26)
+186 = or(-24, 36)
+187 = or(-36, 24)
 188 = and(186, 187)
 189 = and(185, 188)
 190 = and(182, 189)
-191 = or(-190, -39)
+191 = or(43, 26)
+192 = or(-26, -43)
+193 = and(191, 192)
+194 = or(20, -190, 193)
+# generating effects, implcation when the game is not stopped and bounds,preconditions hold:
+195 = and(25, 26)
 # computing x variables for constraints,['?x', '?y'] add/sub/none:
 # computing y variables for constraints,['?x', '?y'] add/sub/none:
 # new x constraint equality gate with forall x variables: 
 # new y constraint equality gate with forall y variables: 
-192 = and(41, -42)
-# if then constraint for black predicate:
-193 = or(-190, 192)
+196 = and(45, 46)
+# if then constraint for white predicate:
+197 = or(-190, 196)
 # disjunction for all touched positions:
 # frame axiom; if not touched position, then it is propagated:
-194 = or(190, 177)
+198 = or(190, 165)
+199 = and(197, 198)
+200 = and(195, -20)
+201 = or(-200, 199)
+202 = and(175, 194, 201, -20)
+# Player 1 (black) transition function for time step 4: 
+# less than constraints for black moves:
+# propagation constraints:
+203 = or(-45, 47)
+204 = or(-47, 45)
+205 = and(203, 204)
+206 = or(-46, 48)
+207 = or(-48, 46)
+208 = and(206, 207)
+209 = and(205, 208)
+# less than constraints for positive index bounds:
+210 = and(28, -29)
+211 = or(-28, 210)
+# less than constraints for positive index bounds:
+212 = and(30, -31)
+213 = or(-30, 212)
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+214 = or(-28, 33)
+215 = or(-33, 28)
+216 = and(214, 215)
+217 = or(-29, 34)
+218 = or(-34, 29)
+219 = and(217, 218)
+220 = and(216, 219)
+# new y constraint equality gate with forall y variables: 
+221 = or(-30, 35)
+222 = or(-35, 30)
+223 = and(221, 222)
+224 = or(-31, 36)
+225 = or(-36, 31)
+226 = and(224, 225)
+227 = and(223, 226)
+228 = and(220, 227)
+229 = or(-228, -45)
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+230 = and(47, -48)
+# if then constraint for black predicate:
+231 = or(-228, 230)
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+232 = or(228, 209)
 # conjunction for all the then constraints:
-195 = and(179, 191, 193, 194)
+233 = and(211, 213, 229, 231, 232)
 # final if then constraint for current action:
-196 = or(23, 195)
-197 = and(-23, 196)
+234 = or(27, 233)
+235 = and(-27, 234)
 # ------------------------------------------------------------------------
 # Initial state: 
 # ------------------------------------------------------------------------
 # Goal state: 
 # Black goal constraints: 
-198 = or()
+236 = or()
 # And gate for black goal constraints, at index 5
 # And gate for white goal constraints, at index 5
-199 = and()
+237 = and()
 # forcing single index maps to 1: 
-200 = and(-1, -6, -12, -17, -23)
+238 = and(-1, -7, -14, -20, -27)
 # ------------------------------------------------------------------------
 # Nested gates: 
-201 = and(197, 198)
+239 = and(235, 236)
 # white valid constraints at reverse index: 3
-202 = or(-163, 201)
-203 = and(170, 202)
+240 = or(-195, 239)
+241 = and(202, 240)
 # black imply constraints at reverse index: 2
-204 = or(16, 203)
-205 = or(-37, 41)
-206 = or(-41, 37)
-207 = and(205, 206)
-208 = or(-38, 42)
-209 = or(-42, 38)
-210 = and(208, 209)
-211 = and(207, 210)
-212 = and(211, 198)
-213 = or(-16, 212)
-214 = and(133, 204, 213)
+242 = or(19, 241)
+243 = or(-43, 47)
+244 = or(-47, 43)
+245 = and(243, 244)
+246 = or(-44, 48)
+247 = or(-48, 44)
+248 = and(246, 247)
+249 = and(245, 248)
+250 = and(249, 236)
+251 = or(-19, 250)
+252 = and(158, 242, 251)
 # white valid constraints at reverse index: 1
-215 = or(-99, 214)
-216 = and(106, 215)
+253 = or(-118, 252)
+254 = and(125, 253)
 # black imply constraints at reverse index: 0
-217 = or(5, 216)
-218 = or(-33, 41)
-219 = or(-41, 33)
-220 = and(218, 219)
-221 = or(-34, 42)
-222 = or(-42, 34)
-223 = and(221, 222)
-224 = and(220, 223)
-225 = and(224, 198)
-226 = or(-5, 225)
-227 = and(69, 217, 226)
+255 = or(6, 254)
+256 = or(-39, 47)
+257 = or(-47, 39)
+258 = and(256, 257)
+259 = or(-40, 48)
+260 = or(-48, 40)
+261 = and(259, 260)
+262 = and(258, 261)
+263 = and(262, 236)
+264 = or(-6, 263)
+265 = and(81, 255, 264)
 # ------------------------------------------------------------------------
 # Final gate: 
 # Conjunction of Initial gate, forced gate and nested output gate: 
-228 = and(-31, 200, 227)
+266 = and(-37, 238, 265)
