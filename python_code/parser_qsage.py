@@ -900,6 +900,20 @@ class Parse:
           # ========================================================
         self.black_goal_constraints.append(temp_list)
 
+      self.forbidden_flag = 0
+      
+      if ('#forbidden' in self.parsed_dict):
+          # there are forbidden boards
+          self.forbidden_flag = 1
+          # get the list of lists
+          self.forbidden_boards = []
+          for line in self.parsed_dict['#forbidden']:
+            board_config = []
+            for constraint in line:
+                board_config.append(constraint)
+            self.forbidden_boards.append(board_config)  
+      print(self.forbidden_boards)
+      
       self.invariant_flag = 0
 
       if ('#invariant' in self.parsed_dict):
