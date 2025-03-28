@@ -560,6 +560,9 @@ class BlackWhiteNestedIndexBased:
                 temp_then_constraint_output_gates.append(self.generate_if_then_predicate_constraint(
                     cur_equality_output_gate, predicate, time_step, "neg"))
 
+            for board in self.parsed.black_forbidden_boards[i]:
+                print(board)
+            
             # remember effect positions, later for frame axioms:
             touched_position_output_gates = []
 
