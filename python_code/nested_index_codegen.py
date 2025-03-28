@@ -524,11 +524,13 @@ class BlackWhiteNestedIndexBased:
             # gather positions used in precondition and effect constraints and generate equality gates with forall variables:
             # constraints for postive precondition:
             for precondition in self.parsed.black_action_list[i].positive_preconditions:
+                self.encoding.append(['# POSITIVE PRECONDITION'])
                 # no spaces for sake of correct parsing:
                 assert (" " not in precondition)
                 split_precondition = precondition.strip(")").split("(")
                 predicate = split_precondition[0]
                 constraint_pair = split_precondition[1].split(",")
+
                 # if we have counter bound index, we compute it directly:
                 if ("lt" in predicate and "?c" in constraint_pair):
                     self.encoding.append(
@@ -559,12 +561,14 @@ class BlackWhiteNestedIndexBased:
                     self.move_variables[time_step][1], self.move_variables[time_step][2], constraint_pair)
                 temp_then_constraint_output_gates.append(self.generate_if_then_predicate_constraint(
                     cur_equality_output_gate, predicate, time_step, "neg"))
-
-            for board in self.parsed.black_forbidden_boards[i]:
-                print(board)
             
+            for board in self.parsed.black_forbidden_boards:
+                print(board)
+
             # remember effect positions, later for frame axioms:
             touched_position_output_gates = []
+
+            # temp_then_constraint_output_gates.append(black_won)
 
             # constraints for postive effects:
             for effect in self.parsed.black_action_list[i].positive_effects:
@@ -1913,7 +1917,10 @@ class BlackWhiteNestedIndexBased:
                 if (self.makermaker_game == 1):
                     temp_list.append(self.encoding_variables.get_vars(1))
 
+            if (i % 2 == 0):
+              temp_list.append(self.encoding_variables.get_vars(1))
             self.move_variables.append(temp_list)
+        # self.winning_variables.append(self.encoding_variables.get_vars(1))
 
         if (parsed.args.debug == 1):
             print("Number of (log) black choosing variables: ",

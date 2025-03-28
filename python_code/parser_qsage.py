@@ -351,6 +351,7 @@ def combine(args):
             if (no_computation == 0):
                 cur_temp_goal.extend(index_list)
             f_combined_file.write(" ".join(cur_temp_goal) + "\n")
+
     if ("#blackforbidden" in p_parsed_dict):
         f_combined_file.write("#blackforbidden\n")
         for goal in p_parsed_dict["#blackforbidden"]:
@@ -361,7 +362,6 @@ def combine(args):
             if (no_computation == 0):
                 cur_temp_goal.extend(index_list)
             f_combined_file.write(" ".join(cur_temp_goal) + "\n")
-
 
 
 class Parse:
@@ -827,6 +827,7 @@ class Parse:
                 count = count + 1
             # handiling the final action:
             cur_action = action_gen.Action(self, one_action_lines)
+            print(cur_action)
             self.black_action_list.append(cur_action)
 
             # setting x and y flags:
@@ -933,32 +934,55 @@ class Parse:
 
             self.white_forbidden_flag = 0
 
+            self.white_forbidden_boards = []
             if ('#whiteforbidden' in self.parsed_dict):
                 # there are forbidden boards
                 self.white_forbidden_flag = 1
                 # get the list of lists
-                self.white_forbidden_boards = []
                 for line in self.parsed_dict['#whiteforbidden']:
                     board_config = []
                     for constraint in line:
                         board_config.append(constraint)
                     self.white_forbidden_boards.append(board_config)
             # print(self.white_forbidden_boards)
-            
+
             self.black_forbidden_flag = 0
 
+            self.black_forbidden_boards = []
+            singular_action_line = []
             if ('#blackforbidden' in self.parsed_dict):
                 # there are forbidden boards
                 self.black_forbidden_flag = 1
                 # get the list of lists
-                self.black_forbidden_boards = []
-                for line in self.parsed_dict['#blackforbidden']:
-                    board_config = []
-                    for constraint in line:
-                        board_config.append(constraint)
-                    self.black_forbidden_boards.append(board_config)
-            # print(self.black_forbidden_boards)
+                for i, line in enumerate(self.parsed_dict['#blackforbidden']):
+                    strin1 = ":action forbidden" + str(i)
+                    upstring = strin1.strip("\n").strip(" ").split(" ")
+                    singular_action_line.append(upstring)
+                    string2 = ":parameters ()"
+                    upstring2 = string2.strip("\n").strip(" ").split(" ")
+                    singular_action_line.append(upstring2)
 
+                    idx = ":indexbounds (ge(?x,xmin) le(?x,xmax) ge(?y,ymin) le(?y,ymax))"
+                    idx_bound = idx.strip("\n").strip(" ").split(" ")
+                    singular_action_line.append(idx_bound)
+
+                    string = ":precondition ("
+                    for j, k in enumerate(line):
+                        string += k
+                        if j+1 != len(line):
+                            string += " "
+                    finalstring = string + ")"
+                    here = finalstring.strip("\n").strip(" ").split(" ")
+
+                    singular_action_line.append(here)
+
+                    eff1 = ":effect (bw)"
+                    eff = eff1.strip("\n").strip(" ").split(" ")
+                    singular_action_line.append(eff)
+                    act = action_gen.Action(self, singular_action_line)
+                    self.black_action_list.append(act)
+
+                    singular_action_line = []
 
             self.invariant_flag = 0
 
