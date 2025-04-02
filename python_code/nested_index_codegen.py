@@ -387,8 +387,8 @@ class BlackWhiteNestedIndexBased:
                 self.quantifier_block.append(
                     ['exists(' + ', '.join(str(x) for x in self.move_variables[i][4]) + ')'])
                 # same thing as above but with [i][5]
-                self.quantifier_block.append(
-                    ['exists(' + ', '.join(str(x) for x in self.move_variables[i][5]) + ')'])
+                # self.quantifier_block.append(
+                #     ['exists(' + ', '.join(str(x) for x in self.move_variables[i][5]) + ')'])
 
         if (self.num_black_goal_constraints > 1):
             self.quantifier_block.append(['# black goal choice variables: '])
@@ -397,7 +397,6 @@ class BlackWhiteNestedIndexBased:
 
         # black goal variables:
         self.quantifier_block.append(['# black goal index variables: '])
-        self.quantifier_block.append(['# IT IS FALSE HERE'])
         all_black_goal_vars = []
         all_black_goal_vars.extend(self.black_goal_index_variables[0])
         all_black_goal_vars.extend(self.black_goal_index_variables[1])
@@ -597,7 +596,7 @@ class BlackWhiteNestedIndexBased:
                 # for now we assume only increment exists:
                 # we handle the increment function separately:
                 if ("inc" == predicate):
-                    # print(predicate,constraint_pair)
+                    print(predicate, constraint_pair)
                     # if parameters are equal to forall variables, then we increment the counter in those branches:
                     counter_forall_equality_gate = self.generate_counter_forall_equality_gate(
                         time_step)
@@ -625,6 +624,12 @@ class BlackWhiteNestedIndexBased:
                         -counter_forall_equality_gate, self.gates_generator.output_gate)
                     temp_then_constraint_output_gates.append(
                         self.gates_generator.output_gate)
+                elif ("bw" == predicate):
+                    # print((self.quantifier_block[1][0])[-2])
+                    self.encoding.append(
+                        ['# Black effect'])
+                    temp_then_constraint_output_gates.append(
+                        int((self.quantifier_block[1][0])[-2]))
                 else:
                     if ("?c" == constraint_pair[0]):
                         cur_equality_output_gate = self.generate_position_equalities_with_adder_and_subtractors(
