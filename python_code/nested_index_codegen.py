@@ -266,6 +266,16 @@ class BlackWhiteNestedIndexBased:
                 [self.predicate_variables[time_step][0], self.predicate_variables[time_step][1]])
             # if then constraint:
             self.encoding.append(['# if then constraint for white predicate:'])
+            # I attempted to make changes from here TODO
+        elif (predicate == 'bw'):
+            print("BLACK WON")
+            self.encoding.append(['# BW variable'])
+            # self.gates_generator.and_gate(
+            #   [self.predicate_variables[time_step]]
+            # )
+        elif (predicate == 'ww'):
+            print("WHITE WON")
+            self.encoding.append(['# WW variable'])
         else:
             assert (predicate == 'open')
             # if the predicate is open then we set the cur predicate variable to open:
@@ -329,6 +339,8 @@ class BlackWhiteNestedIndexBased:
 
                 # adding game stop variable if present:
                 cur_all_action_vars.extend(self.move_variables[i][3])
+                # this is for the bw variable
+                cur_all_action_vars.extend(self.move_variables[i][4])
                 self.quantifier_block.append(
                     ['exists(' + ', '.join(str(x) for x in cur_all_action_vars) + ')'])
             else:
@@ -374,6 +386,7 @@ class BlackWhiteNestedIndexBased:
                     ['# indicator variables, specifying which position is voilated in illegal move: '])
                 self.quantifier_block.append(
                     ['exists(' + ', '.join(str(x) for x in self.move_variables[i][4]) + ')'])
+                # same thing as above but with [i][5]
                 self.quantifier_block.append(
                     ['exists(' + ', '.join(str(x) for x in self.move_variables[i][5]) + ')'])
 
@@ -384,6 +397,7 @@ class BlackWhiteNestedIndexBased:
 
         # black goal variables:
         self.quantifier_block.append(['# black goal index variables: '])
+        self.quantifier_block.append(['# IT IS FALSE HERE'])
         all_black_goal_vars = []
         all_black_goal_vars.extend(self.black_goal_index_variables[0])
         all_black_goal_vars.extend(self.black_goal_index_variables[1])
@@ -563,7 +577,7 @@ class BlackWhiteNestedIndexBased:
                     self.move_variables[time_step][1], self.move_variables[time_step][2], constraint_pair)
                 temp_then_constraint_output_gates.append(self.generate_if_then_predicate_constraint(
                     cur_equality_output_gate, predicate, time_step, "neg"))
-            
+
             for board in self.parsed.black_forbidden_boards:
                 print(board)
 
@@ -1406,7 +1420,7 @@ class BlackWhiteNestedIndexBased:
             # if variables are not present due to single goal constraint, we simply add the conjunction:
             black_goal_step_output_gates.append(
                 self.gates_generator.output_gate)
-
+            print(black_goal_step_output_gates)
         # if the number of disjunction is not the max upper limit, we need less than constraint:
         if (self.num_black_goal_constraints > 1):
             if (self.disjunction_goal_upper_limit != self.num_black_goal_constraints):
@@ -1920,7 +1934,7 @@ class BlackWhiteNestedIndexBased:
                     temp_list.append(self.encoding_variables.get_vars(1))
 
             if (i % 2 == 0):
-              temp_list.append(self.encoding_variables.get_vars(1))
+                temp_list.append(self.encoding_variables.get_vars(1))
             self.move_variables.append(temp_list)
         # self.winning_variables.append(self.encoding_variables.get_vars(1))
 
