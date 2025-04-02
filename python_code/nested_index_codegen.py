@@ -374,6 +374,8 @@ class BlackWhiteNestedIndexBased:
                     ['# indicator variables, specifying which position is voilated in illegal move: '])
                 self.quantifier_block.append(
                     ['exists(' + ', '.join(str(x) for x in self.move_variables[i][4]) + ')'])
+                self.quantifier_block.append(
+                    ['exists(' + ', '.join(str(x) for x in self.move_variables[i][5]) + ')'])
 
         if (self.num_black_goal_constraints > 1):
             self.quantifier_block.append(['# black goal choice variables: '])
