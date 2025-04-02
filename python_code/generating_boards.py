@@ -19,9 +19,9 @@ for i in range(3):
                                                             [o, p, q]])
                                     num_1 = np.count_nonzero(pos_boards == 1)
                                     num_2 = np.count_nonzero(pos_boards == 2)
-                                    if (num_1 == num_2 or num_1 == num_2 + 1) and (num_1==num_2):
+                                    if (num_1==num_2):
                                         whiteboards.append(pos_boards)
-                                    if (num_1 == num_2 or num_1 == num_2 + 1) and (num_1==num_2+1):
+                                    if  (num_1==num_2+1):
                                         blackboards.append(pos_boards)
 
 
