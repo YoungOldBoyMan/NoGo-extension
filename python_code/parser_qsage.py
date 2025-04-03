@@ -341,9 +341,9 @@ def combine(args):
                 cur_temp_goal.extend(index_list)
             f_combined_file.write(" ".join(cur_temp_goal) + "\n")
 
-    if ("#whiteforbidden" in p_parsed_dict):
-        f_combined_file.write("#whiteforbidden\n")
-        for goal in p_parsed_dict["#whiteforbidden"]:
+    if ("#whitewinboards" in p_parsed_dict):
+        f_combined_file.write("#whitewinboards\n")
+        for goal in p_parsed_dict["#whitewinboards"]:
             # copy for index computation:
             cur_temp_goal = list(goal)
             index_list, no_computation = compute_index_bounds(cur_temp_goal)
@@ -352,9 +352,9 @@ def combine(args):
                 cur_temp_goal.extend(index_list)
             f_combined_file.write(" ".join(cur_temp_goal) + "\n")
 
-    if ("#blackforbidden" in p_parsed_dict):
-        f_combined_file.write("#blackforbidden\n")
-        for goal in p_parsed_dict["#blackforbidden"]:
+    if ("#blackwinboards" in p_parsed_dict):
+        f_combined_file.write("#blackwinboards\n")
+        for goal in p_parsed_dict["#blackwinboards"]:
             # copy for index computation:
             cur_temp_goal = list(goal)
             index_list, no_computation = compute_index_bounds(cur_temp_goal)
@@ -826,6 +826,7 @@ class Parse:
                 one_action_lines.append(line)
                 count = count + 1
             # handiling the final action:
+            print(one_action_lines)
             cur_action = action_gen.Action(self, one_action_lines)
             print(cur_action)
             self.black_action_list.append(cur_action)
@@ -932,33 +933,19 @@ class Parse:
                     # ========================================================
                 self.black_goal_constraints.append(temp_list)
 
-            self.white_forbidden_flag = 0
+            self.black_win_flag = 0
 
-            self.white_forbidden_boards = []
-            if ('#whiteforbidden' in self.parsed_dict):
-                # there are forbidden boards
-                self.white_forbidden_flag = 1
-                # get the list of lists
-                for line in self.parsed_dict['#whiteforbidden']:
-                    board_config = []
-                    for constraint in line:
-                        board_config.append(constraint)
-                    self.white_forbidden_boards.append(board_config)
-            # print(self.white_forbidden_boards)
-
-            self.black_forbidden_flag = 0
-
-            self.black_forbidden_boards = []
+            self.black_win_boards = []
             singular_action_line = []
-            if ('#blackforbidden' in self.parsed_dict):
+            if ('#blackwinboards' in self.parsed_dict):
                 # there are forbidden boards
-                self.black_forbidden_flag = 1
+                self.black_win_flag = 1
                 # get the list of lists
-                for i, line in enumerate(self.parsed_dict['#blackforbidden']):
+                for i, line in enumerate(self.parsed_dict['#blackwinboards']):
                     strin1 = ":action forbidden" + str(i)
                     upstring = strin1.strip("\n").strip(" ").split(" ")
                     singular_action_line.append(upstring)
-                    string2 = ":parameters ()"
+                    string2 = ":parameters (?x, ?y)"
                     upstring2 = string2.strip("\n").strip(" ").split(" ")
                     singular_action_line.append(upstring2)
 
@@ -976,13 +963,52 @@ class Parse:
 
                     singular_action_line.append(here)
 
-                    eff1 = ":effect (bw)"
+                    eff1 = ":effect (bw(?x, ?y))"
                     eff = eff1.strip("\n").strip(" ").split(" ")
                     singular_action_line.append(eff)
                     act = action_gen.Action(self, singular_action_line)
                     self.black_action_list.append(act)
 
                     singular_action_line = []
+
+            self.white_win_flag = 0
+
+            self.white_win_boards = []
+            singular_action_line = []
+            # if ('#whitewinboards' in self.parsed_dict):
+            #     # there are forbidden boards
+            #     self.white_forbidden_flag = 1
+            #     # get the list of lists
+            #     for i, line in enumerate(self.parsed_dict['#whitewinboards']):
+            #         strin1 = ":action forbidden" + str(i)
+            #         upstring = strin1.strip("\n").strip(" ").split(" ")
+            #         singular_action_line.append(upstring)
+            #         string2 = ":parameters (?x, ?y)"
+            #         upstring2 = string2.strip("\n").strip(" ").split(" ")
+            #         singular_action_line.append(upstring2)
+
+            #         idx = ":indexbounds (ge(?x,xmin) le(?x,xmax) ge(?y,ymin) le(?y,ymax))"
+            #         idx_bound = idx.strip("\n").strip(" ").split(" ")
+            #         singular_action_line.append(idx_bound)
+
+            #         string = ":precondition ("
+            #         for j, k in enumerate(line):
+            #             string += k
+            #             if j+1 != len(line):
+            #                 string += " "
+            #         finalstring = string + ")"
+            #         here = finalstring.strip("\n").strip(" ").split(" ")
+
+            #         singular_action_line.append(here)
+
+            #         eff1 = ":effect (ww(?x, ?y))"
+            #         eff = eff1.strip("\n").strip(" ").split(" ")
+            #         singular_action_line.append(eff)
+            #         act = action_gen.Action(self, singular_action_line)
+            #         print(act)
+            #         self.white_action_list.append(act)
+
+            #         singular_action_line = []
 
             self.invariant_flag = 0
 

@@ -331,6 +331,7 @@ class BlackWhiteNestedIndexBased:
             # starts with 0 and even is black (i.e., existential moves):
             if (i % 2 == 0):
                 cur_all_action_vars = []
+                black_win_action_vars = []
                 # adding action variables:
                 cur_all_action_vars.extend(self.move_variables[i][0])
                 # adding parameter variables:
@@ -340,9 +341,11 @@ class BlackWhiteNestedIndexBased:
                 # adding game stop variable if present:
                 cur_all_action_vars.extend(self.move_variables[i][3])
                 # this is for the bw variable
-                cur_all_action_vars.extend(self.move_variables[i][4])
+                black_win_action_vars.extend(self.win_variables[i])
                 self.quantifier_block.append(
                     ['exists(' + ', '.join(str(x) for x in cur_all_action_vars) + ')'])
+                self.quantifier_block.append(
+                    ['exists(' + ', '.join(str(x) for x in black_win_action_vars) + ')'])
             else:
 
                 cur_all_action_vars = []
@@ -386,7 +389,7 @@ class BlackWhiteNestedIndexBased:
                     ['# indicator variables, specifying which position is voilated in illegal move: '])
                 self.quantifier_block.append(
                     ['exists(' + ', '.join(str(x) for x in self.move_variables[i][4]) + ')'])
-                # same thing as above but with [i][5]
+                # same thing as above but with [i][5] - this is ww
                 # self.quantifier_block.append(
                 #     ['exists(' + ', '.join(str(x) for x in self.move_variables[i][5]) + ')'])
 
@@ -577,7 +580,7 @@ class BlackWhiteNestedIndexBased:
                 temp_then_constraint_output_gates.append(self.generate_if_then_predicate_constraint(
                     cur_equality_output_gate, predicate, time_step, "neg"))
 
-            for board in self.parsed.black_forbidden_boards:
+            for board in self.parsed.black_win_boards:
                 print(board)
 
             # remember effect positions, later for frame axioms:
@@ -628,8 +631,9 @@ class BlackWhiteNestedIndexBased:
                     # print((self.quantifier_block[1][0])[-2])
                     self.encoding.append(
                         ['# Black effect'])
-                    temp_then_constraint_output_gates.append(
-                        int((self.quantifier_block[1][0])[-2]))
+                    if time_step % 2 == 0:
+                        temp_then_constraint_output_gates.append(
+                            int(self.win_variables[time_step][0]))
                 else:
                     if ("?c" == constraint_pair[0]):
                         cur_equality_output_gate = self.generate_position_equalities_with_adder_and_subtractors(
@@ -1709,6 +1713,7 @@ class BlackWhiteNestedIndexBased:
 
 # Final output gate is an nested-gate with inital, goal and transition gates:
 
+
     def generate_final_gate(self):
 
         self.encoding.append(
@@ -1798,9 +1803,20 @@ class BlackWhiteNestedIndexBased:
                 self.encoding.append(
                     ['# black imply constraints at reverse index: ' + str(reverse_index)])
                 # first implying the cur_outgate with negated game stop gate:
-                self.gates_generator.or_gate(
-                    [self.move_variables[reverse_index][3][0], cur_outgate])
                 negated_implication_gate = self.gates_generator.output_gate
+                black_win_var = []
+                for k in range(len(self.win_variables)):
+                    if (k % 2 == 0):
+                        black_win_var.append((self.win_variables[k][0]))
+                # print(self.move_variables[reverse_index][3][0])
+                # print(cur_outgate)
+                # print(*(black_win_var))
+                self.gates_generator.or_gate(
+                    [self.move_variables[reverse_index][3][0], cur_outgate, *black_win_var])
+                # CHANGES MADE ABOVE. BELOW are the OLD, ABOVE are the NEW
+                # self.gates_generator.or_gate(
+                #     [self.move_variables[reverse_index][3][0], cur_outgate])
+
                 # propagate to the last step and imply black goal:
 
                 if (self.parsed.args.force_black_player_stop == 1):
@@ -1904,8 +1920,10 @@ class BlackWhiteNestedIndexBased:
             math.pow(2, self.num_white_action_variables))
 
         self.move_variables = []
+        self.win_variables = []
         for i in range(parsed.depth):
             temp_list = []
+            win_var = []
             # for black we use the black log action variables:
             if (i % 2 == 0):
                 # we always append the binary format, we will optimise later:
@@ -1937,9 +1955,14 @@ class BlackWhiteNestedIndexBased:
                 # also add white game stop variable if maker-maker game:
                 if (self.makermaker_game == 1):
                     temp_list.append(self.encoding_variables.get_vars(1))
-
-            if (i % 2 == 0):
-                temp_list.append(self.encoding_variables.get_vars(1))
+            # generates the bw or ww variable depending on the turn
+            if i % 2 == 0:
+                # generate bw for the action
+                win_var.append(self.encoding_variables.get_vars(1))
+            else:
+                # generate ww for the action
+                win_var.append(self.encoding_variables.get_vars(1))
+            self.win_variables.append(win_var[0])
             self.move_variables.append(temp_list)
         # self.winning_variables.append(self.encoding_variables.get_vars(1))
 
