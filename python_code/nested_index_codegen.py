@@ -268,11 +268,10 @@ class BlackWhiteNestedIndexBased:
             self.encoding.append(['# if then constraint for white predicate:'])
             # I attempted to make changes from here TODO
         elif (predicate == 'bw'):
-            print("BLACK WON")
             self.encoding.append(['# BW variable'])
-            # self.gates_generator.and_gate(
-            #   [self.predicate_variables[time_step]]
-            # )
+            self.gates_generator.and_gate(
+                [self.win_variables[time_step-1][0]]
+            )
         elif (predicate == 'ww'):
             print("WHITE WON")
             self.encoding.append(['# WW variable'])
@@ -345,6 +344,9 @@ class BlackWhiteNestedIndexBased:
                 self.quantifier_block.append(
                     ['exists(' + ', '.join(str(x) for x in cur_all_action_vars) + ')'])
                 self.quantifier_block.append(
+                    ['# There exists winning variables for black']
+                )
+                self.quantifier_block.append(
                     ['exists(' + ', '.join(str(x) for x in black_win_action_vars) + ')'])
             else:
 
@@ -352,6 +354,9 @@ class BlackWhiteNestedIndexBased:
                 # adding action variables:
                 exists_action_vars = []
                 # if number of actions/moves are only 1, we make it existential:
+                self.quantifier_block.append(
+                    ['# Number of actions/moves are only 1 - existential white move']
+                )
                 if (self.num_white_actions == 1):
                     exists_action_vars.extend(self.move_variables[i][0])
 
@@ -502,6 +507,7 @@ class BlackWhiteNestedIndexBased:
             temp_then_constraint_output_gates = []
             # generate positive index bound constraints:
             for index_constraint in self.parsed.black_action_list[i].positive_indexbounds:
+
                 # we only add bounds if variables are allocated:
                 if (self.parsed.x_flag != 1 and "?x" in index_constraint):
                     continue
@@ -542,7 +548,6 @@ class BlackWhiteNestedIndexBased:
             # gather positions used in precondition and effect constraints and generate equality gates with forall variables:
             # constraints for postive precondition:
             for precondition in self.parsed.black_action_list[i].positive_preconditions:
-                self.encoding.append(['# POSITIVE PRECONDITION'])
                 # no spaces for sake of correct parsing:
                 assert (" " not in precondition)
                 split_precondition = precondition.strip(")").split("(")
@@ -579,9 +584,6 @@ class BlackWhiteNestedIndexBased:
                     self.move_variables[time_step][1], self.move_variables[time_step][2], constraint_pair)
                 temp_then_constraint_output_gates.append(self.generate_if_then_predicate_constraint(
                     cur_equality_output_gate, predicate, time_step, "neg"))
-
-            for board in self.parsed.black_win_boards:
-                print(board)
 
             # remember effect positions, later for frame axioms:
             touched_position_output_gates = []
@@ -627,13 +629,13 @@ class BlackWhiteNestedIndexBased:
                         -counter_forall_equality_gate, self.gates_generator.output_gate)
                     temp_then_constraint_output_gates.append(
                         self.gates_generator.output_gate)
-                elif ("bw" == predicate):
-                    # print((self.quantifier_block[1][0])[-2])
-                    self.encoding.append(
-                        ['# Black effect'])
-                    if time_step % 2 == 0:
-                        temp_then_constraint_output_gates.append(
-                            int(self.win_variables[time_step][0]))
+                # OUT COMMENTED TODO
+                # elif ("bw" == predicate):
+                #     # print((self.quantifier_block[1][0])[-2])
+                #     self.encoding.append(
+                #         ['# Black effect'])
+                #     temp_then_constraint_output_gates.append(
+                #         int(self.win_variables[time_step][0]))
                 else:
                     if ("?c" == constraint_pair[0]):
                         cur_equality_output_gate = self.generate_position_equalities_with_adder_and_subtractors(
@@ -674,6 +676,11 @@ class BlackWhiteNestedIndexBased:
             temp_then_constraint_output_gates.append(
                 self.gates_generator.output_gate)
 
+            # added the bw variable check at the end of black move
+            for effect in self.parsed.black_action_list[i].positive_effects:
+                split_effect = effect.strip(")").split("(")
+                predicate = split_effect[0]
+                constraint_pair = split_effect[1].split(",")
             assert (len(temp_then_constraint_output_gates) != 0)
             # conjunction of all the then constraints:
             self.encoding.append(
@@ -687,6 +694,21 @@ class BlackWhiteNestedIndexBased:
             # self.transition_step_output_gates.append(self.gates_generator.output_gate)
             current_transition_step_output_gates.append(
                 self.gates_generator.output_gate)
+            black_win_var = 0
+            if ("bw" == predicate):
+                self.encoding.append(
+                    ['# Black win true'])
+                black_win_var = int(self.win_variables[time_step][0])
+            else:
+                self.encoding.append(
+                    ['# Black win false'])
+                black_win_var = -int(self.win_variables[time_step][0]) 
+            self.encoding.append(
+                ['# Kommentar'])
+            self.gates_generator.if_then_gate(
+                final_if_condition_output_gate, black_win_var
+            )
+            current_transition_step_output_gates.append(self.gates_generator.output_gate)
 
         # only at the end, we set the conjunction to step output gate:
         self.gates_generator.and_gate(current_transition_step_output_gates)
@@ -1148,7 +1170,6 @@ class BlackWhiteNestedIndexBased:
                 assert (len(self.move_variables[i][2]) == 1)
                 # print("y linear")
                 cur_temp_gates.append(-self.move_variables[i][2][0])
-
         # if the max x and y indices are 1, then we also force symbolic variables:
         if (self.xmax == 1):
             assert (len(self.forall_position_variables[0]) == 1)
@@ -1720,10 +1741,13 @@ class BlackWhiteNestedIndexBased:
             ["# ------------------------------------------------------------------------"])
         self.encoding.append(['# Nested gates: '])
 
+        self.gates_generator.or_gate(
+            [self.black_goal_output_gate, self.win_variables[-1][0]])
+
         # '''
         # starting with goal gate and last black gate:
         self.gates_generator.and_gate(
-            [self.transition_step_output_gates[-1], self.black_goal_output_gate])
+            [self.transition_step_output_gates[-1], self.gates_generator.output_gate])
         cur_outgate = self.gates_generator.output_gate
         # print("and", cur_outgate)
 
@@ -1800,45 +1824,87 @@ class BlackWhiteNestedIndexBased:
                 # print("and", cur_outgate)
             # for black we imply with game stop condition:
             else:
-                self.encoding.append(
-                    ['# black imply constraints at reverse index: ' + str(reverse_index)])
+                self.encoding.append(['# black imply constraints at reverse index: ' + str(reverse_index)])
                 # first implying the cur_outgate with negated game stop gate:
+                self.gates_generator.or_gate([self.move_variables[reverse_index][3][0], cur_outgate])
                 negated_implication_gate = self.gates_generator.output_gate
-                black_win_var = []
-                for k in range(len(self.win_variables)):
-                    if (k % 2 == 0):
-                        black_win_var.append((self.win_variables[k][0]))
-                # print(self.move_variables[reverse_index][3][0])
-                # print(cur_outgate)
-                # print(*(black_win_var))
-                self.gates_generator.or_gate(
-                    [self.move_variables[reverse_index][3][0], cur_outgate, *black_win_var])
-                # CHANGES MADE ABOVE. BELOW are the OLD, ABOVE are the NEW
-                # self.gates_generator.or_gate(
-                #     [self.move_variables[reverse_index][3][0], cur_outgate])
-
                 # propagate to the last step and imply black goal:
 
                 if (self.parsed.args.force_black_player_stop == 1):
                     cur_forced_output_gates = []
-                    self.encoding.append(
-                        ['# propagating all further predicates: '])
-                    for p_index in range(reverse_index+1, self.parsed.depth):
-                        cur_forced_output_gates.append(
-                            self.propagated_output_gates[p_index])
+                    self.encoding.append(['# propagating all further predicates: '])
+                    for p_index in range(reverse_index+1,self.parsed.depth):
+                        cur_forced_output_gates.append(self.propagated_output_gates[p_index])
                     # conjunction of all the gates:
                     self.gates_generator.and_gate(cur_forced_output_gates)
                 else:
-                    self.gates_generator.complete_equality_gate(
-                        self.predicate_variables[reverse_index+1], self.predicate_variables[self.parsed.depth])
-                self.gates_generator.if_then_gate(self.move_variables[reverse_index][3][0], [
-                                                  self.gates_generator.output_gate, self.black_goal_output_gate])
+                    self.gates_generator.complete_equality_gate(self.predicate_variables[reverse_index+1],self.predicate_variables[self.parsed.depth])
+                self.gates_generator.if_then_gate(self.move_variables[reverse_index][3][0], [self.gates_generator.output_gate, self.black_goal_output_gate, self.win_variables[reverse_index][0]])
                 unnegated_implication_gate = self.gates_generator.output_gate
                 # conjunction with this round of constraints:
-                self.gates_generator.and_gate(
-                    [self.transition_step_output_gates[reverse_index], negated_implication_gate, unnegated_implication_gate])
+                self.gates_generator.and_gate([self.transition_step_output_gates[reverse_index], negated_implication_gate, unnegated_implication_gate])
 
                 cur_outgate = self.gates_generator.output_gate
+
+                
+                
+                # self.encoding.append(
+                #     ['# black imply constraints at reverse index: ' + str(reverse_index)])
+                # # first implying the cur_outgate with negated game stop gate:
+                # self.encoding.append(
+                #     ['# Yippee'])
+                # self.gates_generator.and_gate(
+                #     [cur_outgate, -self.win_variables[reverse_index][0]])
+                # # print(self.move_variables[reverse_index][3][0])
+                # # print(cur_outgate)
+                # # print(self.gates_generator.output_gate)
+                # # print(*(black_win_var))
+                # print("Yo: ", self.move_variables[reverse_index], self.gates_generator.output_gate)
+                # self.gates_generator.or_gate(
+                #     [self.move_variables[reverse_index][3][0], self.gates_generator.output_gate])
+
+                # negated_implication_gate = self.gates_generator.output_gate
+                # # CHANGES MADE ABOVE. BELOW are the OLD, ABOVE are the NEW
+                # # self.gates_generator.or_gate(
+                # #     [self.move_variables[reverse_index][3][0], cur_outgate])
+
+                # # propagate to the last step and imply black goal:
+
+                # if (self.parsed.args.force_black_player_stop == 1):
+                #     cur_forced_output_gates = []
+                #     self.encoding.append(
+                #         ['# propagating all further predicates: '])
+                #     for p_index in range(reverse_index+1, self.parsed.depth):
+                #         cur_forced_output_gates.append(
+                #             self.propagated_output_gates[p_index])
+                #     # conjunction of all the gates:
+                #     self.gates_generator.and_gate(cur_forced_output_gates)
+                # else:
+                #     self.gates_generator.complete_equality_gate(
+                #         self.predicate_variables[reverse_index+1], self.predicate_variables[self.parsed.depth])
+
+                # forgotten_gate = self.gates_generator.output_gate
+                # self.gates_generator.or_gate(
+                #     [cur_outgate, self.win_variables[reverse_index][0]])
+                # self.gates_generator.or_gate(
+                #     [self.move_variables[reverse_index][3][0], self.gates_generator.output_gate])
+                # print("test: ", self.move_variables[reverse_index][3][0])
+                
+                # self.gates_generator.or_gate(
+                #     [-self.move_variables[reverse_index][3][0], self.black_goal_output_gate, self.win_variables[reverse_index][0]])
+                # if_gamestop_true = self.gates_generator.output_gate
+                # self.gates_generator.and_gate(
+                #     [if_gamestop_true, forgotten_gate]
+                # )
+                # # self.gates_generator.if_then_gate(self.move_variables[reverse_index][3][0], [
+                # #                                   self.gates_generator.output_gate, self.black_goal_output_gate, forgotten_gate])
+                # unnegated_implication_gate = self.gates_generator.output_gate
+                # # conjunction with this round of constraints:
+                # self.gates_generator.and_gate(
+                #     [self.transition_step_output_gates[reverse_index], negated_implication_gate, unnegated_implication_gate])
+                # new_gate = self.gates_generator.output_gate
+
+                # cur_outgate = self.gates_generator.output_gate
 
         self.encoding.append(
             ["# ------------------------------------------------------------------------"])

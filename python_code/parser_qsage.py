@@ -826,9 +826,7 @@ class Parse:
                 one_action_lines.append(line)
                 count = count + 1
             # handiling the final action:
-            print(one_action_lines)
             cur_action = action_gen.Action(self, one_action_lines)
-            print(cur_action)
             self.black_action_list.append(cur_action)
 
             # setting x and y flags:
