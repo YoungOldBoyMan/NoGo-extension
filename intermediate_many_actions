@@ -1,238 +1,687 @@
-# 1/1 (black/white) Action variables, 2 and 2 (action parameter) index variables (x, y), and game stop variables : 
-exists(1, 2, 3, 4, 5, 6)
-exists(7)
-forall(8, 9, 10, 11)
+# 4/1 (black/white) Action variables, 2 and 2 (action parameter) index variables (x, y), and game stop variables : 
+exists(1, 2, 3, 4, 5, 6, 7, 8, 9)
+exists(10)
+forall(11, 12, 13, 14)
 # white illegal variable: 
-exists(12)
+exists(15)
 # indicator variables, specifying which position is voilated in illegal move: 
-exists(13)
-exists(14, 15, 16, 17, 18, 19)
+exists(16)
+exists(17, 18, 19, 20, 21, 22, 23, 24, 25)
 # black goal index variables: 
 # white goal index and conjunction variables: 
 # Forall index variables: 
-forall(20, 21, 22, 23)
+forall(26, 27, 28, 29)
 # Predicate variables: 
-exists(24, 25)
-exists(26, 27)
-exists(28, 29)
 exists(30, 31)
-output(171)
+exists(32, 33)
+exists(34, 35)
+exists(36, 37)
+output(236)
 # ------------------------------------------------------------------------
 # Transitions: 
 # Player 1 (black) transition function for time step 0: 
 # less than constraints for black moves:
+38 = and(1, -2)
+39 = and(1, 2, -3)
+40 = or(-1, 38, 39)
 # propagation constraints:
-32 = or(-24, 26)
-33 = or(-26, 24)
-34 = and(32, 33)
-35 = or(-25, 27)
-36 = or(-27, 25)
-37 = and(35, 36)
-38 = and(34, 37)
+41 = or(-30, 32)
+42 = or(-32, 30)
+43 = and(41, 42)
+44 = or(-31, 33)
+45 = or(-33, 31)
+46 = and(44, 45)
+47 = and(43, 46)
+48 = and(-1, -2, -3, -4)
 # less than constraints for positive index bounds:
-39 = and(2, -3)
-40 = or(-2, 39)
+49 = and(5, -6)
+50 = or(-5, 49)
 # less than constraints for positive index bounds:
-41 = and(4, -5)
-42 = or(-4, 41)
+51 = and(7, -8)
+52 = or(-7, 51)
 # computing x variables for constraints,['?x', '?y'] add/sub/none:
 # computing y variables for constraints,['?x', '?y'] add/sub/none:
 # new x constraint equality gate with forall x variables: 
-43 = or(-2, 20)
-44 = or(-20, 2)
-45 = and(43, 44)
-46 = or(-3, 21)
-47 = or(-21, 3)
-48 = and(46, 47)
-49 = and(45, 48)
-# new y constraint equality gate with forall y variables: 
-50 = or(-4, 22)
-51 = or(-22, 4)
-52 = and(50, 51)
-53 = or(-5, 23)
-54 = or(-23, 5)
+53 = or(-5, 26)
+54 = or(-26, 5)
 55 = and(53, 54)
-56 = and(52, 55)
-57 = and(49, 56)
-58 = or(-57, -24)
+56 = or(-6, 27)
+57 = or(-27, 6)
+58 = and(56, 57)
+59 = and(55, 58)
+# new y constraint equality gate with forall y variables: 
+60 = or(-7, 28)
+61 = or(-28, 7)
+62 = and(60, 61)
+63 = or(-8, 29)
+64 = or(-29, 8)
+65 = and(63, 64)
+66 = and(62, 65)
+67 = and(59, 66)
+68 = or(-67, -30)
 # computing x variables for constraints,['?x', '?y'] add/sub/none:
 # computing y variables for constraints,['?x', '?y'] add/sub/none:
 # new x constraint equality gate with forall x variables: 
 # new y constraint equality gate with forall y variables: 
-59 = and(26, -27)
+69 = and(32, -33)
 # if then constraint for black predicate:
-60 = or(-57, 59)
+70 = or(-67, 69)
 # disjunction for all touched positions:
 # frame axiom; if not touched position, then it is propagated:
-61 = or(57, 38)
+71 = or(67, 47)
 # conjunction for all the then constraints:
-62 = and(40, 42, 58, 60, 61)
+72 = and(50, 52, 68, 70, 71)
 # final if then constraint for current action:
-63 = or(1, 62)
-64 = and(-1, 63)
+73 = or(-48, 72)
+74 = and(-1, -2, -3, 4)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+75 = or(-74, 72)
+76 = and(-1, -2, 3, -4)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+77 = or(-76, 72)
+78 = and(-1, -2, 3, 4)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+79 = or(-78, 72)
+80 = and(-1, 2, -3, -4)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+81 = or(-80, 72)
+82 = and(-1, 2, -3, 4)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+83 = or(-82, 72)
+84 = and(-1, 2, 3, -4)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+85 = or(-84, 72)
+86 = and(-1, 2, 3, 4)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+87 = or(-86, 72)
+88 = and(1, -2, -3, -4)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+89 = or(-88, 72)
+90 = and(1, -2, -3, 4)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+91 = or(-90, 72)
+92 = and(1, -2, 3, -4)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+93 = or(-92, 72)
+94 = and(1, -2, 3, 4)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+95 = or(-94, 72)
+96 = and(1, 2, -3, -4)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+97 = or(-96, 72)
+98 = and(1, 2, -3, 4)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+99 = or(-98, 72)
+100 = and(40, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93, 95, 97, 99)
 # Player 2 (white) transition function for time step 1: 
 # propagation constraints:
-65 = or(-26, 28)
-66 = or(-28, 26)
-67 = and(65, 66)
-68 = or(-27, 29)
-69 = or(-29, 27)
-70 = and(68, 69)
-71 = and(67, 70)
+101 = or(-32, 34)
+102 = or(-34, 32)
+103 = and(101, 102)
+104 = or(-33, 35)
+105 = or(-35, 33)
+106 = and(104, 105)
+107 = and(103, 106)
 # less than constraints for white moves:
 # generating less than bounds for indexes:
 # less than constraints for positive index bounds:
-72 = and(8, -9)
-73 = or(-8, 72)
+108 = and(11, -12)
+109 = or(-11, 108)
 # less than constraints for positive index bounds:
-74 = and(10, -11)
-75 = or(-10, 74)
-76 = and(73, 75)
-77 = or(7, 76)
+110 = and(13, -14)
+111 = or(-13, 110)
+112 = and(109, 111)
+113 = or(10, 112)
 # conjunction for all the bound constraints:
-78 = and(-7, 77)
+114 = and(-10, 113)
 # single equality gate for the bound boolean variale and the final bound conjuction gate:
-79 = or(-12, 78)
-80 = or(-78, 12)
-81 = and(79, 80)
+115 = or(-15, 114)
+116 = or(-114, 15)
+117 = and(115, 116)
 # generating precondition equalities with boolean variables:
 # computing x variables for constraints,['?x', '?y'] add/sub/none:
 # computing y variables for constraints,['?x', '?y'] add/sub/none:
 # new x constraint equality gate with forall x variables: 
-82 = or(-8, 20)
-83 = or(-20, 8)
-84 = and(82, 83)
-85 = or(-9, 21)
-86 = or(-21, 9)
-87 = and(85, 86)
-88 = and(84, 87)
+118 = or(-11, 26)
+119 = or(-26, 11)
+120 = and(118, 119)
+121 = or(-12, 27)
+122 = or(-27, 12)
+123 = and(121, 122)
+124 = and(120, 123)
 # new y constraint equality gate with forall y variables: 
-89 = or(-10, 22)
-90 = or(-22, 10)
-91 = and(89, 90)
-92 = or(-11, 23)
-93 = or(-23, 11)
-94 = and(92, 93)
-95 = and(91, 94)
-96 = and(88, 95)
-97 = or(26, 13)
-98 = or(-13, -26)
-99 = and(97, 98)
-100 = or(7, -96, 99)
+125 = or(-13, 28)
+126 = or(-28, 13)
+127 = and(125, 126)
+128 = or(-14, 29)
+129 = or(-29, 14)
+130 = and(128, 129)
+131 = and(127, 130)
+132 = and(124, 131)
+133 = or(32, 16)
+134 = or(-16, -32)
+135 = and(133, 134)
+136 = or(10, -132, 135)
 # generating effects, implcation when the game is not stopped and bounds,preconditions hold:
-101 = and(12, 13)
+137 = and(15, 16)
 # computing x variables for constraints,['?x', '?y'] add/sub/none:
 # computing y variables for constraints,['?x', '?y'] add/sub/none:
 # new x constraint equality gate with forall x variables: 
 # new y constraint equality gate with forall y variables: 
-102 = and(28, 29)
+138 = and(34, 35)
 # if then constraint for white predicate:
-103 = or(-96, 102)
+139 = or(-132, 138)
 # disjunction for all touched positions:
 # frame axiom; if not touched position, then it is propagated:
-104 = or(96, 71)
-105 = and(103, 104)
-106 = and(101, -7)
-107 = or(-106, 105)
-108 = and(81, 100, 107, -7)
+140 = or(132, 107)
+141 = and(139, 140)
+142 = and(137, -10)
+143 = or(-142, 141)
+144 = and(117, 136, 143, -10)
 # Player 1 (black) transition function for time step 2: 
 # less than constraints for black moves:
+145 = and(17, -18)
+146 = and(17, 18, -19)
+147 = or(-17, 145, 146)
 # propagation constraints:
-109 = or(-28, 30)
-110 = or(-30, 28)
-111 = and(109, 110)
-112 = or(-29, 31)
-113 = or(-31, 29)
-114 = and(112, 113)
-115 = and(111, 114)
+148 = or(-34, 36)
+149 = or(-36, 34)
+150 = and(148, 149)
+151 = or(-35, 37)
+152 = or(-37, 35)
+153 = and(151, 152)
+154 = and(150, 153)
+155 = and(-17, -18, -19, -20)
 # less than constraints for positive index bounds:
-116 = and(15, -16)
-117 = or(-15, 116)
+156 = and(21, -22)
+157 = or(-21, 156)
 # less than constraints for positive index bounds:
-118 = and(17, -18)
-119 = or(-17, 118)
+158 = and(23, -24)
+159 = or(-23, 158)
 # computing x variables for constraints,['?x', '?y'] add/sub/none:
 # computing y variables for constraints,['?x', '?y'] add/sub/none:
 # new x constraint equality gate with forall x variables: 
-120 = or(-15, 20)
-121 = or(-20, 15)
-122 = and(120, 121)
-123 = or(-16, 21)
-124 = or(-21, 16)
-125 = and(123, 124)
-126 = and(122, 125)
+160 = or(-21, 26)
+161 = or(-26, 21)
+162 = and(160, 161)
+163 = or(-22, 27)
+164 = or(-27, 22)
+165 = and(163, 164)
+166 = and(162, 165)
 # new y constraint equality gate with forall y variables: 
-127 = or(-17, 22)
-128 = or(-22, 17)
-129 = and(127, 128)
-130 = or(-18, 23)
-131 = or(-23, 18)
-132 = and(130, 131)
-133 = and(129, 132)
-134 = and(126, 133)
-135 = or(-134, -28)
+167 = or(-23, 28)
+168 = or(-28, 23)
+169 = and(167, 168)
+170 = or(-24, 29)
+171 = or(-29, 24)
+172 = and(170, 171)
+173 = and(169, 172)
+174 = and(166, 173)
+175 = or(-174, -34)
 # computing x variables for constraints,['?x', '?y'] add/sub/none:
 # computing y variables for constraints,['?x', '?y'] add/sub/none:
 # new x constraint equality gate with forall x variables: 
 # new y constraint equality gate with forall y variables: 
-136 = and(30, -31)
+176 = and(36, -37)
 # if then constraint for black predicate:
-137 = or(-134, 136)
+177 = or(-174, 176)
 # disjunction for all touched positions:
 # frame axiom; if not touched position, then it is propagated:
-138 = or(134, 115)
+178 = or(174, 154)
 # conjunction for all the then constraints:
-139 = and(117, 119, 135, 137, 138)
+179 = and(157, 159, 175, 177, 178)
 # final if then constraint for current action:
-140 = or(14, 139)
-141 = and(-14, 140)
+180 = or(-155, 179)
+181 = and(-17, -18, -19, 20)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+182 = or(-181, 179)
+183 = and(-17, -18, 19, -20)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+184 = or(-183, 179)
+185 = and(-17, -18, 19, 20)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+186 = or(-185, 179)
+187 = and(-17, 18, -19, -20)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+188 = or(-187, 179)
+189 = and(-17, 18, -19, 20)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+190 = or(-189, 179)
+191 = and(-17, 18, 19, -20)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+192 = or(-191, 179)
+193 = and(-17, 18, 19, 20)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+194 = or(-193, 179)
+195 = and(17, -18, -19, -20)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+196 = or(-195, 179)
+197 = and(17, -18, -19, 20)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+198 = or(-197, 179)
+199 = and(17, -18, 19, -20)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+200 = or(-199, 179)
+201 = and(17, -18, 19, 20)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+202 = or(-201, 179)
+203 = and(17, 18, -19, -20)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+204 = or(-203, 179)
+205 = and(17, 18, -19, 20)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# if then constraint for black predicate:
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+# final if then constraint for current action:
+206 = or(-205, 179)
+207 = and(147, 180, 182, 184, 186, 188, 190, 192, 194, 196, 198, 200, 202, 204, 206)
 # ------------------------------------------------------------------------
 # Initial state: 
-142 = and(-20, 21)
-143 = and(-22, -23)
-144 = and(142, 143)
+208 = and(-26, 27)
+209 = and(-28, -29)
+210 = and(208, 209)
 # Or for all black forall position clauses: 
 # if black condition is true then first time step occupied and color black (i.e. 0): 
-145 = and(24, -25)
-146 = or(-144, 145)
-147 = and(-22, 23)
-148 = and(142, 147)
+211 = and(30, -31)
+212 = or(-210, 211)
+213 = and(-28, 29)
+214 = and(208, 213)
 # Or for all white forall position clauses: 
 # if white condition is true then first time step occupied and color white (i.e. 1): 
-149 = and(24, 25)
-150 = or(-148, 149)
+215 = and(30, 31)
+216 = or(-214, 215)
 # for all other branches the occupied is 0: 
-151 = or(144, 148)
-152 = or(151, -24)
-153 = and(146, 150, 152)
+217 = or(210, 214)
+218 = or(217, -30)
+219 = and(212, 216, 218)
 # ------------------------------------------------------------------------
 # Goal state: 
 # Black goal constraints: 
-154 = or()
+220 = or()
 # And gate for black goal constraints, at index 3
 # And gate for white goal constraints, at index 3
-155 = and()
+221 = and()
 # forcing single index maps to 1: 
-156 = and(-1, -7, -14)
 # ------------------------------------------------------------------------
 # Nested gates: 
-157 = and(141, 154)
+222 = and(207, 220)
 # white valid constraints at reverse index: 1
-158 = or(-101, 157)
-159 = and(108, 158)
+223 = or(-137, 222)
+224 = and(144, 223)
 # black imply constraints at reverse index: 0
-160 = or(6, 159)
-161 = or(-26, 30)
-162 = or(-30, 26)
-163 = and(161, 162)
-164 = or(-27, 31)
-165 = or(-31, 27)
-166 = and(164, 165)
-167 = and(163, 166)
-168 = and(167, 154)
-169 = or(-6, 168)
-170 = and(64, 160, 169)
+225 = or(9, 224)
+226 = or(-32, 36)
+227 = or(-36, 32)
+228 = and(226, 227)
+229 = or(-33, 37)
+230 = or(-37, 33)
+231 = and(229, 230)
+232 = and(228, 231)
+233 = and(232, 220)
+234 = or(-9, 233)
+235 = and(100, 225, 234)
 # ------------------------------------------------------------------------
 # Final gate: 
 # Conjunction of Initial gate, forced gate and nested output gate: 
-171 = and(153, 156, 170)
+236 = and(219, -10, 235)
