@@ -1,439 +1,728 @@
-# 1/1 (black/white) Action variables, 2 and 2 (action parameter) index variables (x, y), and game stop variables : 
-exists(1, 2, 3, 4, 5, 6)
+# 3/1 (black/white) Action variables, 2 and 2 (action parameter) index variables (x, y), and game stop variables : 
+exists(1, 2, 3, 4, 5, 6, 7, 8)
 # There exists winning variables for black
-exists(7)
-exists(8)
-forall(9, 10, 11, 12)
+exists(9)
+# Number of actions/moves are only 1 - existential white move
+exists(10)
+forall(11, 12, 13, 14)
 # white illegal variable: 
-exists(13)
+exists(15)
 # indicator variables, specifying which position is voilated in illegal move: 
-exists(14, 15, 16)
-exists(18, 19, 20, 21, 22, 23)
+exists(16)
+exists(18, 19, 20, 21, 22, 23, 24, 25)
 # There exists winning variables for black
-exists(24)
+exists(26)
 # black goal index variables: 
 # white goal index and conjunction variables: 
 # Forall index variables: 
-forall(25, 26, 27, 28)
+forall(27, 28, 29, 30)
 # Predicate variables: 
-exists(29, 30)
 exists(31, 32)
 exists(33, 34)
 exists(35, 36)
-output(234)
+exists(37, 38)
+output(263)
 # ------------------------------------------------------------------------
 # Transitions: 
 # Player 1 (black) transition function for time step 0: 
+# less than constraints for black moves:
+39 = and(1, -2)
+40 = and(1, 2, -3)
+41 = or(-1, 39, 40)
 # propagation constraints:
-37 = or(-29, 31)
-38 = or(-31, 29)
-39 = and(37, 38)
-40 = or(-30, 32)
-41 = or(-32, 30)
-42 = and(40, 41)
-43 = and(39, 42)
+42 = or(-31, 33)
+43 = or(-33, 31)
+44 = and(42, 43)
+45 = or(-32, 34)
+46 = or(-34, 32)
+47 = and(45, 46)
+48 = and(44, 47)
+49 = and(-1, -2, -3)
 # less than constraints for positive index bounds:
-44 = and(2, -3)
-45 = or(-2, 44)
+50 = and(4, -5)
+51 = or(-4, 50)
 # less than constraints for positive index bounds:
-46 = and(4, -5)
-47 = or(-4, 46)
+52 = and(6, -7)
+53 = or(-6, 52)
 # computing x variables for constraints,['?x', '?y'] add/sub/none:
 # computing y variables for constraints,['?x', '?y'] add/sub/none:
 # new x constraint equality gate with forall x variables: 
-48 = or(-2, 25)
-49 = or(-25, 2)
-50 = and(48, 49)
-51 = or(-3, 26)
-52 = or(-26, 3)
-53 = and(51, 52)
-54 = and(50, 53)
+54 = or(-4, 27)
+55 = or(-27, 4)
+56 = and(54, 55)
+57 = or(-5, 28)
+58 = or(-28, 5)
+59 = and(57, 58)
+60 = and(56, 59)
 # new y constraint equality gate with forall y variables: 
-55 = or(-4, 27)
-56 = or(-27, 4)
-57 = and(55, 56)
-58 = or(-5, 28)
-59 = or(-28, 5)
-60 = and(58, 59)
-61 = and(57, 60)
-62 = and(54, 61)
-63 = or(-62, -29)
-# computing x variables for constraints,['?x', '?y'] add/sub/none:
-# computing y variables for constraints,['?x', '?y'] add/sub/none:
-# new x constraint equality gate with forall x variables: 
-# new y constraint equality gate with forall y variables: 
-64 = and(29, 30)
-# if then constraint for white predicate:
-65 = or(-62, -64)
+61 = or(-6, 29)
+62 = or(-29, 6)
+63 = and(61, 62)
+64 = or(-7, 30)
+65 = or(-30, 7)
+66 = and(64, 65)
+67 = and(63, 66)
+68 = and(60, 67)
+69 = or(-68, -31)
 # computing x variables for constraints,['?x', '?y'] add/sub/none:
 # computing y variables for constraints,['?x', '?y'] add/sub/none:
 # new x constraint equality gate with forall x variables: 
 # new y constraint equality gate with forall y variables: 
-66 = and(29, -30)
+70 = and(33, -34)
 # if then constraint for black predicate:
-67 = or(-62, -66)
-# computing x variables for constraints,['?x', '?y'] add/sub/none:
-# computing y variables for constraints,['?x', '?y'] add/sub/none:
-# new x constraint equality gate with forall x variables: 
-# new y constraint equality gate with forall y variables: 
-68 = and(31, -32)
-# if then constraint for black predicate:
-69 = or(-62, 68)
+71 = or(-68, 70)
 # disjunction for all touched positions:
 # frame axiom; if not touched position, then it is propagated:
-70 = or(62, 43)
+72 = or(68, 48)
 # conjunction for all the then constraints:
-71 = and(45, 47, 63, 65, 67, 69, 70)
+73 = and(51, 53, 69, 71, 72)
 # final if then constraint for current action:
-72 = or(1, 71)
+74 = or(-49, 73)
 # Black win false
 # Kommentar
-73 = or(1, -7)
+75 = or(-49, -9)
+76 = and(-1, -2, 3)
 # less than constraints for positive index bounds:
 # less than constraints for positive index bounds:
-# computing x variables for constraints,['0', '0'] add/sub/none:
-# computing y variables for constraints,['0', '0'] add/sub/none:
-# x constraint binary format with forall x variables: 
-74 = and(25, 26)
-# y constraint binary format with forall y variables: 
-75 = and(27, 28)
-76 = and(74, 75)
-77 = or(-76, -29)
-# computing x variables for constraints,['0', '1'] add/sub/none:
-# computing y variables for constraints,['0', '1'] add/sub/none:
-# x constraint binary format with forall x variables: 
-# y constraint binary format with forall y variables: 
-78 = and(-27, -28)
-79 = and(74, 78)
-80 = or(-79, -29)
-# computing x variables for constraints,['0', '2'] add/sub/none:
-# computing y variables for constraints,['0', '2'] add/sub/none:
-# x constraint binary format with forall x variables: 
-# y constraint binary format with forall y variables: 
-81 = and(-27, 28)
-82 = and(74, 81)
-83 = or(-82, -29)
-# computing x variables for constraints,['1', '0'] add/sub/none:
-# computing y variables for constraints,['1', '0'] add/sub/none:
-# x constraint binary format with forall x variables: 
-84 = and(-25, -26)
-# y constraint binary format with forall y variables: 
-85 = and(84, 75)
-86 = or(-85, -29)
-# computing x variables for constraints,['1', '1'] add/sub/none:
-# computing y variables for constraints,['1', '1'] add/sub/none:
-# x constraint binary format with forall x variables: 
-# y constraint binary format with forall y variables: 
-87 = and(84, 78)
-88 = or(-87, -29)
-# computing x variables for constraints,['1', '2'] add/sub/none:
-# computing y variables for constraints,['1', '2'] add/sub/none:
-# x constraint binary format with forall x variables: 
-# y constraint binary format with forall y variables: 
-89 = and(84, 81)
-# if then constraint for black predicate:
-90 = or(-89, 66)
 # computing x variables for constraints,['2', '0'] add/sub/none:
 # computing y variables for constraints,['2', '0'] add/sub/none:
 # x constraint binary format with forall x variables: 
-91 = and(-25, 26)
+77 = and(-27, 28)
 # y constraint binary format with forall y variables: 
-92 = and(91, 75)
+78 = and(29, 30)
+79 = and(77, 78)
+80 = and(31, 32)
 # if then constraint for white predicate:
-93 = or(-92, 64)
-# computing x variables for constraints,['2', '1'] add/sub/none:
-# computing y variables for constraints,['2', '1'] add/sub/none:
+81 = or(-79, 80)
+# computing x variables for constraints,['1', '2'] add/sub/none:
+# computing y variables for constraints,['1', '2'] add/sub/none:
 # x constraint binary format with forall x variables: 
+82 = and(-27, -28)
 # y constraint binary format with forall y variables: 
-94 = and(91, 78)
+83 = and(-29, 30)
+84 = and(82, 83)
+85 = and(31, -32)
 # if then constraint for black predicate:
-95 = or(-94, 66)
+86 = or(-84, 85)
 # computing x variables for constraints,['2', '2'] add/sub/none:
 # computing y variables for constraints,['2', '2'] add/sub/none:
 # x constraint binary format with forall x variables: 
 # y constraint binary format with forall y variables: 
-96 = and(91, 81)
+87 = and(77, 83)
 # if then constraint for white predicate:
-97 = or(-96, 64)
+88 = or(-87, 80)
+# computing x variables for constraints,['2', '1'] add/sub/none:
+# computing y variables for constraints,['2', '1'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+89 = and(-29, -30)
+90 = and(77, 89)
+# if then constraint for black predicate:
+91 = or(-90, 85)
 # computing x variables for constraints,['?x', '?y'] add/sub/none:
 # computing y variables for constraints,['?x', '?y'] add/sub/none:
 # new x constraint equality gate with forall x variables: 
 # new y constraint equality gate with forall y variables: 
 # BW variable
-98 = or(-62, 7)
+92 = or(-68, 9)
 # disjunction for all touched positions:
 # frame axiom; if not touched position, then it is propagated:
 # conjunction for all the then constraints:
-99 = and(45, 47, 77, 80, 83, 86, 88, 90, 93, 95, 97, 98, 70)
+93 = and(51, 53, 81, 86, 88, 91, 92, 72)
 # final if then constraint for current action:
-100 = or(-1, 99)
+94 = or(-76, 93)
 # Black win true
 # Kommentar
-101 = or(-1, 7)
-102 = and(72, 73, 100, 101)
+95 = or(-76, 9)
+96 = and(-1, 2, -3)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['1', '2'] add/sub/none:
+# computing y variables for constraints,['1', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for black predicate:
+# computing x variables for constraints,['2', '2'] add/sub/none:
+# computing y variables for constraints,['2', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for white predicate:
+# computing x variables for constraints,['2', '1'] add/sub/none:
+# computing y variables for constraints,['2', '1'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for black predicate:
+# computing x variables for constraints,['1', '1'] add/sub/none:
+# computing y variables for constraints,['1', '1'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+97 = and(82, 89)
+# if then constraint for white predicate:
+98 = or(-97, 80)
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# BW variable
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+99 = and(51, 53, 86, 88, 91, 98, 92, 72)
+# final if then constraint for current action:
+100 = or(-96, 99)
+# Black win true
+# Kommentar
+101 = or(-96, 9)
+102 = and(-1, 2, 3)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['1', '0'] add/sub/none:
+# computing y variables for constraints,['1', '0'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+103 = and(82, 78)
+# if then constraint for white predicate:
+104 = or(-103, 80)
+# computing x variables for constraints,['1', '2'] add/sub/none:
+# computing y variables for constraints,['1', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for black predicate:
+# computing x variables for constraints,['2', '2'] add/sub/none:
+# computing y variables for constraints,['2', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for white predicate:
+# computing x variables for constraints,['2', '1'] add/sub/none:
+# computing y variables for constraints,['2', '1'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for black predicate:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# BW variable
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+105 = and(51, 53, 104, 86, 88, 91, 92, 72)
+# final if then constraint for current action:
+106 = or(-102, 105)
+# Black win true
+# Kommentar
+107 = or(-102, 9)
+108 = and(1, -2, -3)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['1', '2'] add/sub/none:
+# computing y variables for constraints,['1', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for black predicate:
+# computing x variables for constraints,['2', '2'] add/sub/none:
+# computing y variables for constraints,['2', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for white predicate:
+# computing x variables for constraints,['2', '1'] add/sub/none:
+# computing y variables for constraints,['2', '1'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for black predicate:
+# computing x variables for constraints,['0', '2'] add/sub/none:
+# computing y variables for constraints,['0', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+109 = and(27, 28)
+# y constraint binary format with forall y variables: 
+110 = and(109, 83)
+# if then constraint for white predicate:
+111 = or(-110, 80)
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# BW variable
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+112 = and(51, 53, 86, 88, 91, 111, 92, 72)
+# final if then constraint for current action:
+113 = or(-108, 112)
+# Black win true
+# Kommentar
+114 = or(-108, 9)
+115 = and(1, -2, 3)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['1', '2'] add/sub/none:
+# computing y variables for constraints,['1', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for black predicate:
+# computing x variables for constraints,['2', '2'] add/sub/none:
+# computing y variables for constraints,['2', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for white predicate:
+# computing x variables for constraints,['2', '1'] add/sub/none:
+# computing y variables for constraints,['2', '1'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for black predicate:
+# computing x variables for constraints,['0', '1'] add/sub/none:
+# computing y variables for constraints,['0', '1'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+116 = and(109, 89)
+# if then constraint for white predicate:
+117 = or(-116, 80)
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# BW variable
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+118 = and(51, 53, 86, 88, 91, 117, 92, 72)
+# final if then constraint for current action:
+119 = or(-115, 118)
+# Black win true
+# Kommentar
+120 = or(-115, 9)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['1', '2'] add/sub/none:
+# computing y variables for constraints,['1', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for black predicate:
+# computing x variables for constraints,['2', '2'] add/sub/none:
+# computing y variables for constraints,['2', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for white predicate:
+# computing x variables for constraints,['2', '1'] add/sub/none:
+# computing y variables for constraints,['2', '1'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for black predicate:
+# computing x variables for constraints,['0', '0'] add/sub/none:
+# computing y variables for constraints,['0', '0'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+121 = and(109, 78)
+# if then constraint for white predicate:
+122 = or(-121, 80)
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# BW variable
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+123 = and(51, 53, 86, 88, 91, 122, 92, 72)
+# final if then constraint for current action:
+124 = or(-40, 123)
+# Black win true
+# Kommentar
+125 = or(-40, 9)
+126 = and(41, 74, 75, 94, 95, 100, 101, 106, 107, 113, 114, 119, 120, 124, 125)
 # Player 2 (white) transition function for time step 1: 
 # propagation constraints:
-103 = or(-31, 33)
-104 = or(-33, 31)
-105 = and(103, 104)
-106 = or(-32, 34)
-107 = or(-34, 32)
-108 = and(106, 107)
-109 = and(105, 108)
+127 = or(-33, 35)
+128 = or(-35, 33)
+129 = and(127, 128)
+130 = or(-34, 36)
+131 = or(-36, 34)
+132 = and(130, 131)
+133 = and(129, 132)
 # less than constraints for white moves:
 # generating less than bounds for indexes:
 # less than constraints for positive index bounds:
-110 = and(9, -10)
-111 = or(-9, 110)
+134 = and(11, -12)
+135 = or(-11, 134)
 # less than constraints for positive index bounds:
-112 = and(11, -12)
-113 = or(-11, 112)
-114 = and(111, 113)
-115 = or(8, 114)
+136 = and(13, -14)
+137 = or(-13, 136)
+138 = and(135, 137)
+139 = or(10, 138)
 # conjunction for all the bound constraints:
-116 = and(-8, 115)
+140 = and(-10, 139)
 # single equality gate for the bound boolean variale and the final bound conjuction gate:
-117 = or(-13, 116)
-118 = or(-116, 13)
-119 = and(117, 118)
+141 = or(-15, 140)
+142 = or(-140, 15)
+143 = and(141, 142)
 # generating precondition equalities with boolean variables:
 # computing x variables for constraints,['?x', '?y'] add/sub/none:
 # computing y variables for constraints,['?x', '?y'] add/sub/none:
 # new x constraint equality gate with forall x variables: 
-120 = or(-9, 25)
-121 = or(-25, 9)
-122 = and(120, 121)
-123 = or(-10, 26)
-124 = or(-26, 10)
-125 = and(123, 124)
-126 = and(122, 125)
-# new y constraint equality gate with forall y variables: 
-127 = or(-11, 27)
-128 = or(-27, 11)
-129 = and(127, 128)
-130 = or(-12, 28)
-131 = or(-28, 12)
-132 = and(130, 131)
-133 = and(129, 132)
-134 = and(126, 133)
-135 = or(31, 14)
-136 = or(-14, -31)
-137 = and(135, 136)
-138 = or(8, -134, 137)
-# computing x variables for constraints,['?x', '?y'] add/sub/none:
-# computing y variables for constraints,['?x', '?y'] add/sub/none:
-# new x constraint equality gate with forall x variables: 
-# new y constraint equality gate with forall y variables: 
-139 = and(31, 32)
-# if then constraint for white predicate:
-140 = or(139, 15)
-141 = or(-15, -139)
-142 = and(140, 141)
-143 = or(8, -134, 142)
-# computing x variables for constraints,['?x', '?y'] add/sub/none:
-# computing y variables for constraints,['?x', '?y'] add/sub/none:
-# new x constraint equality gate with forall x variables: 
-# new y constraint equality gate with forall y variables: 
-# if then constraint for black predicate:
-144 = or(68, 16)
-145 = or(-16, -68)
+144 = or(-11, 27)
+145 = or(-27, 11)
 146 = and(144, 145)
-147 = or(8, -134, 146)
+147 = or(-12, 28)
+148 = or(-28, 12)
+149 = and(147, 148)
+150 = and(146, 149)
+# new y constraint equality gate with forall y variables: 
+151 = or(-13, 29)
+152 = or(-29, 13)
+153 = and(151, 152)
+154 = or(-14, 30)
+155 = or(-30, 14)
+156 = and(154, 155)
+157 = and(153, 156)
+158 = and(150, 157)
+159 = or(33, 16)
+160 = or(-16, -33)
+161 = and(159, 160)
+162 = or(10, -158, 161)
 # generating effects, implcation when the game is not stopped and bounds,preconditions hold:
-148 = and(13, 14, 15, 16)
+163 = and(15, 16)
 # computing x variables for constraints,['?x', '?y'] add/sub/none:
 # computing y variables for constraints,['?x', '?y'] add/sub/none:
 # new x constraint equality gate with forall x variables: 
 # new y constraint equality gate with forall y variables: 
-149 = and(33, 34)
+164 = and(35, 36)
 # if then constraint for white predicate:
-150 = or(-134, 149)
+165 = or(-158, 164)
 # disjunction for all touched positions:
 # frame axiom; if not touched position, then it is propagated:
-151 = or(134, 109)
-152 = and(150, 151)
-153 = and(148, -8)
-154 = or(-153, 152)
-155 = and(119, 138, 143, 147, 154, -8)
+166 = or(158, 133)
+167 = and(165, 166)
+168 = and(163, -10)
+169 = or(-168, 167)
+170 = and(143, 162, 169, -10)
 # Player 1 (black) transition function for time step 2: 
+# less than constraints for black moves:
+171 = and(18, -19)
+172 = and(18, 19, -20)
+173 = or(-18, 171, 172)
 # propagation constraints:
-156 = or(-33, 35)
-157 = or(-35, 33)
-158 = and(156, 157)
-159 = or(-34, 36)
-160 = or(-36, 34)
-161 = and(159, 160)
-162 = and(158, 161)
-# less than constraints for positive index bounds:
-163 = and(19, -20)
-164 = or(-19, 163)
-# less than constraints for positive index bounds:
-165 = and(21, -22)
-166 = or(-21, 165)
-# computing x variables for constraints,['?x', '?y'] add/sub/none:
-# computing y variables for constraints,['?x', '?y'] add/sub/none:
-# new x constraint equality gate with forall x variables: 
-167 = or(-19, 25)
-168 = or(-25, 19)
-169 = and(167, 168)
-170 = or(-20, 26)
-171 = or(-26, 20)
-172 = and(170, 171)
-173 = and(169, 172)
-# new y constraint equality gate with forall y variables: 
-174 = or(-21, 27)
-175 = or(-27, 21)
+174 = or(-35, 37)
+175 = or(-37, 35)
 176 = and(174, 175)
-177 = or(-22, 28)
-178 = or(-28, 22)
+177 = or(-36, 38)
+178 = or(-38, 36)
 179 = and(177, 178)
 180 = and(176, 179)
-181 = and(173, 180)
-182 = or(-181, -33)
+181 = and(-18, -19, -20)
+# less than constraints for positive index bounds:
+182 = and(21, -22)
+183 = or(-21, 182)
+# less than constraints for positive index bounds:
+184 = and(23, -24)
+185 = or(-23, 184)
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+186 = or(-21, 27)
+187 = or(-27, 21)
+188 = and(186, 187)
+189 = or(-22, 28)
+190 = or(-28, 22)
+191 = and(189, 190)
+192 = and(188, 191)
+# new y constraint equality gate with forall y variables: 
+193 = or(-23, 29)
+194 = or(-29, 23)
+195 = and(193, 194)
+196 = or(-24, 30)
+197 = or(-30, 24)
+198 = and(196, 197)
+199 = and(195, 198)
+200 = and(192, 199)
+201 = or(-200, -35)
 # computing x variables for constraints,['?x', '?y'] add/sub/none:
 # computing y variables for constraints,['?x', '?y'] add/sub/none:
 # new x constraint equality gate with forall x variables: 
 # new y constraint equality gate with forall y variables: 
-# if then constraint for white predicate:
-183 = or(-181, -149)
-# computing x variables for constraints,['?x', '?y'] add/sub/none:
-# computing y variables for constraints,['?x', '?y'] add/sub/none:
-# new x constraint equality gate with forall x variables: 
-# new y constraint equality gate with forall y variables: 
-184 = and(33, -34)
+202 = and(37, -38)
 # if then constraint for black predicate:
-185 = or(-181, -184)
-# computing x variables for constraints,['?x', '?y'] add/sub/none:
-# computing y variables for constraints,['?x', '?y'] add/sub/none:
-# new x constraint equality gate with forall x variables: 
-# new y constraint equality gate with forall y variables: 
-186 = and(35, -36)
-# if then constraint for black predicate:
-187 = or(-181, 186)
+203 = or(-200, 202)
 # disjunction for all touched positions:
 # frame axiom; if not touched position, then it is propagated:
-188 = or(181, 162)
+204 = or(200, 180)
 # conjunction for all the then constraints:
-189 = and(164, 166, 182, 183, 185, 187, 188)
+205 = and(183, 185, 201, 203, 204)
 # final if then constraint for current action:
-190 = or(18, 189)
+206 = or(-181, 205)
 # Black win false
 # Kommentar
-191 = or(18, -24)
+207 = or(-181, -26)
+208 = and(-18, -19, 20)
 # less than constraints for positive index bounds:
 # less than constraints for positive index bounds:
-# computing x variables for constraints,['0', '0'] add/sub/none:
-# computing y variables for constraints,['0', '0'] add/sub/none:
-# x constraint binary format with forall x variables: 
-# y constraint binary format with forall y variables: 
-192 = or(-76, -33)
-# computing x variables for constraints,['0', '1'] add/sub/none:
-# computing y variables for constraints,['0', '1'] add/sub/none:
-# x constraint binary format with forall x variables: 
-# y constraint binary format with forall y variables: 
-193 = or(-79, -33)
-# computing x variables for constraints,['0', '2'] add/sub/none:
-# computing y variables for constraints,['0', '2'] add/sub/none:
-# x constraint binary format with forall x variables: 
-# y constraint binary format with forall y variables: 
-194 = or(-82, -33)
-# computing x variables for constraints,['1', '0'] add/sub/none:
-# computing y variables for constraints,['1', '0'] add/sub/none:
-# x constraint binary format with forall x variables: 
-# y constraint binary format with forall y variables: 
-195 = or(-85, -33)
-# computing x variables for constraints,['1', '1'] add/sub/none:
-# computing y variables for constraints,['1', '1'] add/sub/none:
-# x constraint binary format with forall x variables: 
-# y constraint binary format with forall y variables: 
-196 = or(-87, -33)
-# computing x variables for constraints,['1', '2'] add/sub/none:
-# computing y variables for constraints,['1', '2'] add/sub/none:
-# x constraint binary format with forall x variables: 
-# y constraint binary format with forall y variables: 
-# if then constraint for black predicate:
-197 = or(-89, 184)
 # computing x variables for constraints,['2', '0'] add/sub/none:
 # computing y variables for constraints,['2', '0'] add/sub/none:
 # x constraint binary format with forall x variables: 
 # y constraint binary format with forall y variables: 
 # if then constraint for white predicate:
-198 = or(-92, 149)
-# computing x variables for constraints,['2', '1'] add/sub/none:
-# computing y variables for constraints,['2', '1'] add/sub/none:
+209 = or(-79, 164)
+# computing x variables for constraints,['1', '2'] add/sub/none:
+# computing y variables for constraints,['1', '2'] add/sub/none:
 # x constraint binary format with forall x variables: 
 # y constraint binary format with forall y variables: 
+210 = and(35, -36)
 # if then constraint for black predicate:
-199 = or(-94, 184)
+211 = or(-84, 210)
 # computing x variables for constraints,['2', '2'] add/sub/none:
 # computing y variables for constraints,['2', '2'] add/sub/none:
 # x constraint binary format with forall x variables: 
 # y constraint binary format with forall y variables: 
 # if then constraint for white predicate:
-200 = or(-96, 149)
+212 = or(-87, 164)
+# computing x variables for constraints,['2', '1'] add/sub/none:
+# computing y variables for constraints,['2', '1'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for black predicate:
+213 = or(-90, 210)
 # computing x variables for constraints,['?x', '?y'] add/sub/none:
 # computing y variables for constraints,['?x', '?y'] add/sub/none:
 # new x constraint equality gate with forall x variables: 
 # new y constraint equality gate with forall y variables: 
 # BW variable
-201 = or(-181, 24)
+214 = or(-200, 26)
 # disjunction for all touched positions:
 # frame axiom; if not touched position, then it is propagated:
 # conjunction for all the then constraints:
-202 = and(164, 166, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 188)
+215 = and(183, 185, 209, 211, 212, 213, 214, 204)
 # final if then constraint for current action:
-203 = or(-18, 202)
+216 = or(-208, 215)
 # Black win true
 # Kommentar
-204 = or(-18, 24)
-205 = and(190, 191, 203, 204)
+217 = or(-208, 26)
+218 = and(-18, 19, -20)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['1', '2'] add/sub/none:
+# computing y variables for constraints,['1', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for black predicate:
+# computing x variables for constraints,['2', '2'] add/sub/none:
+# computing y variables for constraints,['2', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for white predicate:
+# computing x variables for constraints,['2', '1'] add/sub/none:
+# computing y variables for constraints,['2', '1'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for black predicate:
+# computing x variables for constraints,['1', '1'] add/sub/none:
+# computing y variables for constraints,['1', '1'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for white predicate:
+219 = or(-97, 164)
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# BW variable
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+220 = and(183, 185, 211, 212, 213, 219, 214, 204)
+# final if then constraint for current action:
+221 = or(-218, 220)
+# Black win true
+# Kommentar
+222 = or(-218, 26)
+223 = and(-18, 19, 20)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['1', '0'] add/sub/none:
+# computing y variables for constraints,['1', '0'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for white predicate:
+224 = or(-103, 164)
+# computing x variables for constraints,['1', '2'] add/sub/none:
+# computing y variables for constraints,['1', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for black predicate:
+# computing x variables for constraints,['2', '2'] add/sub/none:
+# computing y variables for constraints,['2', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for white predicate:
+# computing x variables for constraints,['2', '1'] add/sub/none:
+# computing y variables for constraints,['2', '1'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for black predicate:
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# BW variable
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+225 = and(183, 185, 224, 211, 212, 213, 214, 204)
+# final if then constraint for current action:
+226 = or(-223, 225)
+# Black win true
+# Kommentar
+227 = or(-223, 26)
+228 = and(18, -19, -20)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['1', '2'] add/sub/none:
+# computing y variables for constraints,['1', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for black predicate:
+# computing x variables for constraints,['2', '2'] add/sub/none:
+# computing y variables for constraints,['2', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for white predicate:
+# computing x variables for constraints,['2', '1'] add/sub/none:
+# computing y variables for constraints,['2', '1'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for black predicate:
+# computing x variables for constraints,['0', '2'] add/sub/none:
+# computing y variables for constraints,['0', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for white predicate:
+229 = or(-110, 164)
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# BW variable
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+230 = and(183, 185, 211, 212, 213, 229, 214, 204)
+# final if then constraint for current action:
+231 = or(-228, 230)
+# Black win true
+# Kommentar
+232 = or(-228, 26)
+233 = and(18, -19, 20)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['1', '2'] add/sub/none:
+# computing y variables for constraints,['1', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for black predicate:
+# computing x variables for constraints,['2', '2'] add/sub/none:
+# computing y variables for constraints,['2', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for white predicate:
+# computing x variables for constraints,['2', '1'] add/sub/none:
+# computing y variables for constraints,['2', '1'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for black predicate:
+# computing x variables for constraints,['0', '1'] add/sub/none:
+# computing y variables for constraints,['0', '1'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for white predicate:
+234 = or(-116, 164)
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# BW variable
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+235 = and(183, 185, 211, 212, 213, 234, 214, 204)
+# final if then constraint for current action:
+236 = or(-233, 235)
+# Black win true
+# Kommentar
+237 = or(-233, 26)
+# less than constraints for positive index bounds:
+# less than constraints for positive index bounds:
+# computing x variables for constraints,['1', '2'] add/sub/none:
+# computing y variables for constraints,['1', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for black predicate:
+# computing x variables for constraints,['2', '2'] add/sub/none:
+# computing y variables for constraints,['2', '2'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for white predicate:
+# computing x variables for constraints,['2', '1'] add/sub/none:
+# computing y variables for constraints,['2', '1'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for black predicate:
+# computing x variables for constraints,['0', '0'] add/sub/none:
+# computing y variables for constraints,['0', '0'] add/sub/none:
+# x constraint binary format with forall x variables: 
+# y constraint binary format with forall y variables: 
+# if then constraint for white predicate:
+238 = or(-121, 164)
+# computing x variables for constraints,['?x', '?y'] add/sub/none:
+# computing y variables for constraints,['?x', '?y'] add/sub/none:
+# new x constraint equality gate with forall x variables: 
+# new y constraint equality gate with forall y variables: 
+# BW variable
+# disjunction for all touched positions:
+# frame axiom; if not touched position, then it is propagated:
+# conjunction for all the then constraints:
+239 = and(183, 185, 211, 212, 213, 238, 214, 204)
+# final if then constraint for current action:
+240 = or(-172, 239)
+# Black win true
+# Kommentar
+241 = or(-172, 26)
+242 = and(173, 206, 207, 216, 217, 221, 222, 226, 227, 231, 232, 236, 237, 240, 241)
 # ------------------------------------------------------------------------
 # Initial state: 
 # Or for all black forall position clauses: 
-206 = or(89, 94)
 # if black condition is true then first time step occupied and color black (i.e. 0): 
-207 = or(-206, 66)
 # Or for all white forall position clauses: 
-208 = or(92, 96)
 # if white condition is true then first time step occupied and color white (i.e. 1): 
-209 = or(-208, 64)
 # for all other branches the occupied is 0: 
-210 = or(206, 208)
-211 = or(210, -29)
-212 = and(207, 209, 211)
+243 = or(90, 87)
+244 = or(243, -31)
+245 = and(91, 88, 244)
 # ------------------------------------------------------------------------
 # Goal state: 
 # Black goal constraints: 
-213 = or()
+246 = or()
 # And gate for black goal constraints, at index 3
 # And gate for white goal constraints, at index 3
-214 = and()
+247 = and()
 # forcing single index maps to 1: 
 # ------------------------------------------------------------------------
 # Nested gates: 
-215 = or(213, 24)
-216 = and(205, 215)
+248 = or(246, 26)
+249 = and(242, 248)
 # white valid constraints at reverse index: 1
-217 = or(-148, 216)
-218 = and(155, 217)
+250 = or(-163, 249)
+251 = and(170, 250)
 # black imply constraints at reverse index: 0
-# Yippee
-219 = and(218, -7)
-220 = or(6, 219)
-221 = or(-31, 35)
-222 = or(-35, 31)
-223 = and(221, 222)
-224 = or(-32, 36)
-225 = or(-36, 32)
-226 = and(224, 225)
-227 = and(223, 226)
-228 = or(218, 7)
-229 = or(6, 228)
-230 = and(229, 213)
-231 = or(-6, 230)
-232 = and(102, 220, 231)
-233 = or(232, 213, 7)
+252 = or(8, 251)
+253 = or(-33, 37)
+254 = or(-37, 33)
+255 = and(253, 254)
+256 = or(-34, 38)
+257 = or(-38, 34)
+258 = and(256, 257)
+259 = and(255, 258)
+260 = and(259, 246, 9)
+261 = or(-8, 260)
+262 = and(126, 252, 261)
 # ------------------------------------------------------------------------
 # Final gate: 
 # Conjunction of Initial gate, forced gate and nested output gate: 
-234 = and(212, -8, 233)
+263 = and(245, -10, 262)
