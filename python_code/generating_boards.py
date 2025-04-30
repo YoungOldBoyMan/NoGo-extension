@@ -80,7 +80,6 @@ def bfs_board(board):
                         point_queue.appendleft((new_i, new_j-1))
                 if len(queue) == 0:
                     return False
-    print(board)
     return True
 
 # if not bfs_board(boards[-2]):
@@ -88,12 +87,12 @@ def bfs_board(board):
 # print(final_boards)
 
 
-for i in range(len(blackboards)):
-    if bfs_board(blackboards[i]):
-        final_boards.append(blackboards[i])
+for i in range(len(whiteboards)):
+    if not bfs_board(whiteboards[i]):
+        final_boards.append(whiteboards[i])
 
 
 for i in final_boards:
     print(i)
     print()
-print(len(final_boards))
+print(final_boards[0])
