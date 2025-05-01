@@ -1,8 +1,8 @@
 from collections import deque
 import numpy as np
 
-whiteboards = []
-blackboards = []
+black_win_boards = []
+white_win_boards = []
 final_boards = []
 
 # test comment
@@ -16,14 +16,14 @@ for i in range(3):
                             for p in range(3):
                                 for q in range(3):
                                     pos_boards = np.array([[i, j, k],
-                                                            [l, m, n], 
-                                                            [o, p, q]])
+                                                           [l, m, n],
+                                                           [o, p, q]])
                                     num_1 = np.count_nonzero(pos_boards == 1)
                                     num_2 = np.count_nonzero(pos_boards == 2)
-                                    if (num_1==num_2):
-                                        whiteboards.append(pos_boards)
-                                    if  (num_1==num_2+1):
-                                        blackboards.append(pos_boards)
+                                    if (num_1 == num_2):
+                                        black_win_boards.append(pos_boards)
+                                    if (num_1 == num_2+1):
+                                        white_win_boards.append(pos_boards)
 
 
 def bfs_board(board):
@@ -87,9 +87,9 @@ def bfs_board(board):
 # print(final_boards)
 
 
-for i in range(len(whiteboards)):
-    if not bfs_board(whiteboards[i]):
-        final_boards.append(whiteboards[i])
+for i in range(len(black_win_boards)):
+    if not bfs_board(black_win_boards[i]):
+        final_boards.append(black_win_boards[i])
 
 
 for i in final_boards:
