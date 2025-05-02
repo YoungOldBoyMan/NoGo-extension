@@ -38,18 +38,18 @@ for i in range(len(gb.final_boards)):
     list1.append(as_Sets(gb.final_boards[i]))
 
 
-nyliste = list1.copy()
+forbidden_patterns = list1.copy()
 for i in range(len(list1)):
     d = list1[i]
     for j in range(len(list1)-1-i):
         sec = list1[j+1+i]
         if (d.issubset(sec)):
-            if (list1[j+1+i] in nyliste):
-                nyliste.remove(list1[j+1+i])
+            if (list1[j+1+i] in forbidden_patterns):
+                forbidden_patterns.remove(list1[j+1+i])
 
 
 print()
-print(nyliste)
+print(forbidden_patterns)
 
 
 def as_string(b):
@@ -66,8 +66,8 @@ def as_string(b):
 
 
 endelig = []
-for i in range(len(nyliste)):
-    j = as_string(nyliste[i])
+for i in range(len(forbidden_patterns)):
+    j = as_string(forbidden_patterns[i])
     endelig.append(j)
     print(j)
 
