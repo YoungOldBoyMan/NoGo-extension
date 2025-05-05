@@ -1008,6 +1008,11 @@ class Parse:
 
                     singular_action_line = []
 
+            for action in self.white_action_list:
+                if (self.max_white_preconditions < (len(action.positive_preconditions) + len(action.negative_preconditions))):
+                    self.max_white_preconditions = (
+                        len(action.positive_preconditions) + len(action.negative_preconditions))
+
             self.invariant_flag = 0
 
             if ('#invariant' in self.parsed_dict):
