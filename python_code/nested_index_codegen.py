@@ -694,6 +694,7 @@ class BlackWhiteNestedIndexBased:
             # self.transition_step_output_gates.append(self.gates_generator.output_gate)
             current_transition_step_output_gates.append(
                 self.gates_generator.output_gate)
+            
             black_win_var = 0
             if ("bw" == predicate):
                 self.encoding.append(
