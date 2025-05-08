@@ -1075,22 +1075,22 @@ class BlackWhiteNestedIndexBased:
             current_transition_step_output_gates.append(
                 -self.move_variables[time_step][0][0])
 
-            white_win_var = 0
-            if ("ww" == predicate):
-                self.encoding.append(
-                    ['# White win true'])
-                white_win_var = int(self.win_variables[time_step][0])
-            else:
-                self.encoding.append(
-                    ['# White win false'])
-                white_win_var = -int(self.win_variables[time_step][0])
+        white_win_var = 0
+        if ("ww" == predicate):
             self.encoding.append(
-                ['# White kommentar'])
-            self.gates_generator.if_then_gate(
-                cur_action_binary_output_gate, white_win_var
-            )
-            current_transition_step_output_gates.append(
-                self.gates_generator.output_gate)
+                ['# White win true'])
+            white_win_var = int(self.win_variables[time_step][0])
+        else:
+            self.encoding.append(
+                ['# White win false'])
+            white_win_var = -int(self.win_variables[time_step][0])
+        self.encoding.append(
+            ['# White kommentar'])
+        self.gates_generator.if_then_gate(
+            cur_action_binary_output_gate, white_win_var
+        )
+        current_transition_step_output_gates.append(
+            self.gates_generator.output_gate)
 
         # only at the end, we set the conjunction to step output gate:
         self.gates_generator.and_gate(current_transition_step_output_gates)
