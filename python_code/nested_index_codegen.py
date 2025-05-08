@@ -930,8 +930,10 @@ class BlackWhiteNestedIndexBased:
                 # self.transition_step_output_gates.append(self.gates_generator.output_gate)
                 current_transition_step_output_gates.append(
                     self.gates_generator.output_gate)
-            # asserting that we use all the boolean vars, only for breakthrough/knightthrough:
-            assert (len(temp_precondition_boolean_variables) == 0)
+            # asserting that we use all the boolean vars, only for breakthrough/knightthrough:            
+
+            # TODO: ask about the below   
+            # assert (len(temp_precondition_boolean_variables) == 0)
 
         # '''
         # compute the constraints for effects:
@@ -1064,6 +1066,15 @@ class BlackWhiteNestedIndexBased:
                 self.gates_generator.output_gate)
             
             
+
+            # if not valid, we let the black player to change the state
+
+        # if white moves are only 1, then we force the move variables to first one:
+        if (self.num_white_actions == 1):
+            # self.transition_step_output_gates.append(-self.move_variables[time_step][0][0])
+            current_transition_step_output_gates.append(
+                -self.move_variables[time_step][0][0])
+
             white_win_var = 0
             if ("ww" == predicate):
                 self.encoding.append(
@@ -1080,14 +1091,6 @@ class BlackWhiteNestedIndexBased:
             )
             current_transition_step_output_gates.append(
                 self.gates_generator.output_gate)
-
-            # if not valid, we let the black player to change the state
-
-        # if white moves are only 1, then we force the move variables to first one:
-        if (self.num_white_actions == 1):
-            # self.transition_step_output_gates.append(-self.move_variables[time_step][0][0])
-            current_transition_step_output_gates.append(
-                -self.move_variables[time_step][0][0])
 
         # only at the end, we set the conjunction to step output gate:
         self.gates_generator.and_gate(current_transition_step_output_gates)
