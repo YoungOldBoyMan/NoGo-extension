@@ -1,4 +1,4 @@
-#blackforbidden
+#whitewinpatterns
 black(1,2) white(2,2) black(2,1) 
 black(1,1) white(2,1) black(2,0) black(1,2) white(2,2) 
 white(1,2) black(1,1) white(2,1) black(2,2) black(2,0) 
