@@ -61,7 +61,7 @@ def as_string(b):
             out += "black("
         if (i[0] == "2"):
             out += "white("
-        out += i[1]+","+i[2]+") "
+        out += str(int(i[1])+1)+","+str(int(i[2])+1)+") "
     return out
 
 

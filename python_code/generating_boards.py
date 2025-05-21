@@ -87,9 +87,9 @@ def bfs_board(board):
 # print(final_boards)
 
 
-for i in range(len(black_win_boards)):
-    if not bfs_board(black_win_boards[i]):
-        final_boards.append(black_win_boards[i])
+for i in range(len(white_win_boards)):
+    if not bfs_board(white_win_boards[i]):
+        final_boards.append(white_win_boards[i])
 
 
 for i in final_boards:
