@@ -1,30 +1,68 @@
 from collections import deque
 import numpy as np
 
+BOARD_X = 4
+BOARD_Y = 4
+
 black_win_boards = []
 white_win_boards = []
 final_boards = []
 
-# test comment
-for i in range(3):
-    for j in range(3):
-        for k in range(3):
-            for l in range(3):
-                for m in range(3):
-                    for n in range(3):
-                        for o in range(3):
-                            for p in range(3):
-                                for q in range(3):
-                                    pos_boards = np.array([[i, j, k],
-                                                           [l, m, n],
-                                                           [o, p, q]])
-                                    num_1 = np.count_nonzero(pos_boards == 1)
-                                    num_2 = np.count_nonzero(pos_boards == 2)
-                                    if (num_1 == num_2):
-                                        black_win_boards.append(pos_boards)
-                                    if (num_1 == num_2+1):
-                                        white_win_boards.append(pos_boards)
+var_names = ["i" + str(i) for i in range(BOARD_X*BOARD_Y)]
+out_str = ""
 
+loop_vars = []
+board_code = ""
+cell_index = 0
+
+
+for var in var_names:
+    out_str += f"for {var} in range(3):\n"
+    out_str += "    " * (len(loop_vars) + 1) 
+    loop_vars.append(var)
+
+rows = []
+for row in range(BOARD_X):
+    row_vars = var_names[row * BOARD_Y:(row + 1) * BOARD_Y]
+    rows.append("[" + ", ".join(row_vars) + "]")
+board_assignment = f"pos_boards = np.array([{', '.join(rows)}])\n"
+
+board_logic = """\
+num_1 = np.count_nonzero(pos_boards == 1)
+num_2 = np.count_nonzero(pos_boards == 2)
+if num_1 == num_2:
+    black_win_boards.append(pos_boards)
+elif num_1 == num_2 + 1:
+    white_win_boards.append(pos_boards)
+"""
+
+full_code = out_str + "\n" + "    " * (BOARD_X*BOARD_Y) + board_assignment
+full_code += "    " * (BOARD_Y * BOARD_X) + board_logic.replace("\n", "\n" + "    " * (BOARD_X * BOARD_Y))
+
+
+for i0 in range(3):
+    for i1 in range(3):
+        for i2 in range(3):
+            for i3 in range(3):
+                for i4 in range(3):
+                    for i5 in range(3):
+                        for i6 in range(3):
+                            for i7 in range(3):
+                                for i8 in range(3):
+                                    for i9 in range(3):
+                                        for i10 in range(3):
+                                            for i11 in range(3):
+                                                for i12 in range(3):
+                                                    for i13 in range(3):
+                                                        for i14 in range(3):
+                                                            for i15 in range(3):
+                                                                pos_boards = np.array([[i0, i1, i2, i3], [i4, i5, i6, i7], [i8, i9, i10, i11], [i12, i13, i14, i15]])
+                                                                num_1 = np.count_nonzero(pos_boards == 1)
+                                                                num_2 = np.count_nonzero(pos_boards == 2)
+                                                                if num_1 == num_2:
+                                                                    black_win_boards.append(pos_boards)
+                                                                elif num_1 == num_2 + 1:
+                                                                    white_win_boards.append(pos_boards)
 
 def bfs_board(board):
 
@@ -82,17 +120,11 @@ def bfs_board(board):
                     return False
     return True
 
-# if not bfs_board(boards[-2]):
+# if not bfs_board(boards[-2], BOARD_X, BOARD_Y):
 #     final_boards.append(boards[-2])
 # print(final_boards)
-
 
 for i in range(len(white_win_boards)):
     if not bfs_board(white_win_boards[i]):
         final_boards.append(white_win_boards[i])
 
-
-for i in final_boards:
-    print(i)
-    print()
-print(final_boards[0])
