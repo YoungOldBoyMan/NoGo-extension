@@ -65,10 +65,11 @@ print(full_code)
 #                                                                 elif num_1 == num_2 + 1:
 #                                                                     white_win_boards.append(pos_boards)
 
+
 def bfs_board(board):
 
-    for i in range(3):
-        for j in range(3):
+    for i in range(BOARD_X):
+        for j in range(BOARD_Y):
             queue = deque()
             point_queue = deque()
             explored = []
@@ -83,7 +84,7 @@ def bfs_board(board):
                 explored.append((new_i, new_j))
                 # print(explored)
                 if v == 1:
-                    if new_i != 2 and (not explored.__contains__((new_i+1, new_j))) and board[new_i+1, new_j] != 2:
+                    if new_i != (BOARD_X-1) and (not explored.__contains__((new_i+1, new_j))) and board[new_i+1, new_j] != 2:
                         explored.append((new_i+1, new_j))
                         queue.appendleft(board[new_i+1, new_j])
                         point_queue.appendleft((new_i+1, new_j))
@@ -91,7 +92,7 @@ def bfs_board(board):
                         explored.append((new_i-1, new_j))
                         queue.appendleft(board[new_i-1, new_j])
                         point_queue.appendleft((new_i-1, new_j))
-                    if new_j != 2 and (not explored.__contains__((new_i, new_j+1))) and board[new_i, new_j+1] != 2:
+                    if new_j != (BOARD_Y-1) and (not explored.__contains__((new_i, new_j+1))) and board[new_i, new_j+1] != 2:
                         explored.append((new_i, new_j+1))
                         queue.appendleft(board[new_i, new_j + 1])
                         point_queue.appendleft((new_i, new_j+1))
@@ -101,7 +102,7 @@ def bfs_board(board):
                         point_queue.appendleft((new_i, new_j-1))
 
                 if v == 2:
-                    if new_i != 2 and (not explored.__contains__((new_i+1, new_j))) and board[new_i+1, new_j] != 1:
+                    if new_i != (BOARD_X-1) and (not explored.__contains__((new_i+1, new_j))) and board[new_i+1, new_j] != 1:
                         explored.append((new_i+1, new_j))
                         queue.appendleft(board[new_i+1, new_j])
                         point_queue.appendleft((new_i+1, new_j))
@@ -109,7 +110,7 @@ def bfs_board(board):
                         explored.append((new_i-1, new_j))
                         queue.appendleft(board[new_i-1, new_j])
                         point_queue.appendleft((new_i-1, new_j))
-                    if new_j != 2 and (not explored.__contains__((new_i, new_j+1))) and board[new_i, new_j+1] != 1:
+                    if new_j != (BOARD_Y-1) and (not explored.__contains__((new_i, new_j+1))) and board[new_i, new_j+1] != 1:
                         explored.append((new_i, new_j+1))
                         queue.appendleft(board[new_i, new_j + 1])
                         point_queue.appendleft((new_i, new_j+1))
@@ -128,4 +129,8 @@ def bfs_board(board):
 for i in range(len(white_win_boards)):
     if not bfs_board(white_win_boards[i]):
         final_boards.append(white_win_boards[i])
+        print(white_win_boards[i])
+
+
+print(len(final_boards))
 
