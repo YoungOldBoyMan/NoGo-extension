@@ -3,8 +3,8 @@ import generating_boards as gb
 
 def board_p(b):
     out = ""
-    for i in range(3):
-        for j in range(3):
+    for i in range(gb.BOARD_X):
+        for j in range(gb.BOARD_Y):
             if (b[i, j] == 0):
                 out += ("open("+str(i)+","+str(j)+") ")
             if (b[i, j] == 1):
@@ -20,8 +20,8 @@ def board_p(b):
 
 def as_Sets(b):
     out = set()
-    for i in range(3):
-        for j in range(3):
+    for i in range(gb.BOARD_X):
+        for j in range(gb.BOARD_Y):
             if (b[i, j] == 0):
                 continue
             if (b[i, j] == 1):
@@ -41,6 +41,7 @@ for i in range(len(gb.final_boards)):
 forbidden_patterns = list1.copy()
 for i in range(len(list1)):
     d = list1[i]
+    print("Iteration: " + str(i))
     for j in range(len(list1)-1-i):
         sec = list1[j+1+i]
         if (d.issubset(sec)):
@@ -49,7 +50,7 @@ for i in range(len(list1)):
 
 
 print()
-print(forbidden_patterns)
+print(len(forbidden_patterns))
 
 
 def as_string(b):
@@ -69,6 +70,8 @@ endelig = []
 for i in range(len(forbidden_patterns)):
     j = as_string(forbidden_patterns[i])
     endelig.append(j)
-    print(j)
+    # print(j)
 
-print(len(endelig))
+with open("4x4_patterns.txt", "w") as f:
+    for i in endelig:
+        f.write(i + "\n")
