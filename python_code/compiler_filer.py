@@ -72,6 +72,6 @@ for i in range(len(forbidden_patterns)):
     endelig.append(j)
     # print(j)
 
-with open("3x5_patterns_black.txt", "w") as f:
+with open("2x6_patterns_white.txt", "w") as f:
     for i in endelig:
         f.write(i + "\n")
