@@ -56,13 +56,19 @@ print(len(forbidden_patterns))
 def as_string(b):
     out = ""
     for i in b:
-        if (i[0] == "0"):
+        color = i[0]
+        full_pos = i[1:]
+        if (color == "0"):
             out += "open("
-        if (i[0] == "1"):
+        if (color == "1"):
             out += "black("
-        if (i[0] == "2"):
+        if (color == "2"):
             out += "white("
-        out += str(int(i[1])+1)+","+str(int(i[2])+1)+") "
+        # sometimes we have boardsizes with two digits
+        row = full_pos[0]
+        col = full_pos[1:]
+        out += str(int(row)+1)+","+str(int(col)+1)+") "
+        print(out)
     return out
 
 
@@ -72,6 +78,6 @@ for i in range(len(forbidden_patterns)):
     endelig.append(j)
     # print(j)
 
-with open("1x12_patterns_white.txt", "w") as f:
+with open("1x12_patterns_black.txt", "w") as f:
     for i in endelig:
         f.write(i + "\n")
