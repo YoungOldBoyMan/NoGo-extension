@@ -68,7 +68,6 @@ def as_string(b):
         row = full_pos[0]
         col = full_pos[1:]
         out += str(int(row)+1)+","+str(int(col)+1)+") "
-        print(out)
     return out
 
 
@@ -78,6 +77,6 @@ for i in range(len(forbidden_patterns)):
     endelig.append(j)
     # print(j)
 
-with open("1x12_patterns_black.txt", "w") as f:
+with open("1x11_patterns_white.txt", "w") as f:
     for i in endelig:
         f.write(i + "\n")
